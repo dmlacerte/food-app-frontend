@@ -5,7 +5,8 @@ const AddFood = () => {
   const initialFoodState = {
     id: null,
     name: "",
-    type: ""
+    type: "",
+    daysToExp: 0,
   };
 
   const [food, setFood] = useState(initialFoodState);
@@ -19,7 +20,8 @@ const AddFood = () => {
   const saveFood = () => {
     let data = {
       name: food.name,
-      type: food.type
+      type: food.type,
+      daysToExp: food.daysToExp
     };
 
     FoodManagerDataService.create(data)
@@ -27,7 +29,8 @@ const AddFood = () => {
         setFood({
           id: response.data.id,
           name: response.data.name,
-          type: response.data.type
+          type: response.data.type,
+          daysToExp: response.data.daysToExp
         });
         setSubmitted(true);
         console.log(response.data);
@@ -78,6 +81,20 @@ const AddFood = () => {
               name="type"
             />
           </div>
+
+          <div className="form-group">
+              <label htmlFor="daysToExp">Days to Expiration:</label>
+              <input
+                type="number"
+                step="1"
+                className="form-control"
+                id="daysToExp"
+                required
+                value={food.daysToExp}
+                onChange={handleInputChange}
+                name="daysToExp"
+              />
+            </div>
 
           <button onClick={saveFood} className="btn btn-success">
             Submit

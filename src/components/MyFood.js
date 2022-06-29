@@ -86,6 +86,18 @@ const MyFood = () => {
                 onChange={handleInputChange}
               />
             </div>
+            <div className="form-group">
+              <label htmlFor="daysToExp">Days to Expiration:</label>
+              <input
+                type="number"
+                step="1"
+                className="form-control"
+                id="daysToExp"
+                name="daysToExp"
+                value={currentFood.daysToExp}
+                onChange={handleInputChange}
+              />
+            </div>
           </form>
 
           <button className="badge badge-danger mr-2" onClick={deleteFood}>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const MyFoodList = () => {
   const [foodItems, setFoodItems] = useState([]);
+  const [expiringFoodItems, setExpiringFoodItems] = useState([]);
   const [currentFoodItem, setCurrentFoodItem] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [searchName, setSearchName] = useState("");
@@ -21,7 +22,10 @@ const MyFoodList = () => {
     FoodManagerDataService.getAll()
       .then(response => {
         setFoodItems(response.data);
+        const expiringFood = response.data.filter(food => food.daysToExp < 7);
+        setExpiringFoodItems(expiringFood);
         console.log(response.data);
+        console.log(expiringFood);
       })
       .catch(e => {
         console.log(e);
@@ -84,7 +88,29 @@ const MyFoodList = () => {
         </div>
       </div>
       <div className="col-md-6">
-        <h4>Food Items List</h4>
+        <h4>Use It or Lose It</h4>
+
+        <ul className="list-group">
+          {expiringFoodItems &&
+            expiringFoodItems.map((foodItem, index) => (
+              <li
+                className={
+                  "list-group-item " + (index === currentIndex ? "active" : "")
+                }
+                onClick={() => setActiveFoodItem(foodItem, index)}
+                key={index}
+              >
+                {foodItem.name}
+                <div>
+                  <p>{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
+                </div>
+              </li>
+            ))}
+        </ul>
+      </div>
+
+      <div className="col-md-6">
+        <h4>My Pantry</h4>
 
         <ul className="list-group">
           {foodItems &&
@@ -97,6 +123,9 @@ const MyFoodList = () => {
                 key={index}
               >
                 {foodItem.name}
+                <div>
+                  <p>{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
+                </div>
               </li>
             ))}
         </ul>
@@ -108,7 +137,8 @@ const MyFoodList = () => {
           Remove All
         </button>
       </div>
-      <div className="col-md-6">
+
+      {/* <div className="col-md-6">
         {currentFoodItem ? (
           <div>
             <h4>Food Item</h4>
@@ -139,7 +169,7 @@ const MyFoodList = () => {
             <p>Please click on a Food Item...</p>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
