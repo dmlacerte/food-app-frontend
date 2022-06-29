@@ -3,9 +3,9 @@ import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import AddFood from "./components/add-food.component";
-import MyFood from "./components/myfood.component";
-import MyFoodList from "./components/myfood-list.component";
+import AddFood from "./components/AddFood";
+import MyFood from "./components/MyFood";
+import MyFoodList from "./components/MyFoodList";
 
 class App extends Component {
   render() {
