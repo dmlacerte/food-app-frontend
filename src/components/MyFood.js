@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import FoodManagerDataService from "../services/FoodManagerDataService";
 
-const MyFood = () => {
-  const { id } = useParams();
+const MyFood = ({id, closeModal}) => {
+  // const { id } = useParams();
   let navigate = useNavigate();
 
   const initialFoodState = {
@@ -41,6 +41,7 @@ const MyFood = () => {
       .then(response => {
         console.log(response.data);
         setMessage("The food item was updated successfully!");
+        closeModal();
       })
       .catch(e => {
         console.log(e);
@@ -52,6 +53,7 @@ const MyFood = () => {
       .then(response => {
         console.log(response.data);
         navigate("/myfood");
+        closeModal();
       })
       .catch(e => {
         console.log(e);

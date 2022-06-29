@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import FoodManagerDataService from "../services/FoodManagerDataService";
 import { Link } from "react-router-dom";
+import Container from "./Container.js";
 
 const MyFoodList = () => {
   const [foodItems, setFoodItems] = useState([]);
   const [expiringFoodItems, setExpiringFoodItems] = useState([]);
-  const [currentFoodItem, setCurrentFoodItem] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(-1);
   const [searchName, setSearchName] = useState("");
 
   useEffect(() => {
@@ -34,13 +33,6 @@ const MyFoodList = () => {
 
   const refreshList = () => {
     retrieveFoodItems();
-    setCurrentFoodItem(null);
-    setCurrentIndex(-1);
-  };
-
-  const setActiveFoodItem = (foodItem, index) => {
-    setCurrentFoodItem(foodItem);
-    setCurrentIndex(index);
   };
 
   const removeAllFoodItems = () => {
@@ -94,10 +86,7 @@ const MyFoodList = () => {
           {expiringFoodItems &&
             expiringFoodItems.map((foodItem, index) => (
               <li
-                className={
-                  "list-group-item " + (index === currentIndex ? "active" : "")
-                }
-                onClick={() => setActiveFoodItem(foodItem, index)}
+                className="list-group-item"
                 key={index}
               >
                 {foodItem.name}
@@ -111,21 +100,19 @@ const MyFoodList = () => {
 
       <div className="col-md-6">
         <h4>My Pantry</h4>
-
+        <Container triggerText="add" retrieveFoodItems={retrieveFoodItems}/>
         <ul className="list-group">
           {foodItems &&
             foodItems.map((foodItem, index) => (
               <li
-                className={
-                  "list-group-item " + (index === currentIndex ? "active" : "")
-                }
-                onClick={() => setActiveFoodItem(foodItem, index)}
+                className="list-group-item"
                 key={index}
               >
                 {foodItem.name}
                 <div>
                   <p>{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
                 </div>
+                <Container triggerText="edit" id={foodItem.id} retrieveFoodItems={retrieveFoodItems}/>
               </li>
             ))}
         </ul>
