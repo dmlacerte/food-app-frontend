@@ -51,14 +51,17 @@ const AddFood = () => {
       {submitted ? (
         <div>
           <h4>You submitted successfully!</h4>
-          <button className="btn btn-success" onClick={newFood}>
-            Add
-          </button>
+          <div className="text-center mt-3">
+            <button className="btn btn-success" onClick={newFood}>
+              Add Another
+            </button>
+          </div>
         </div>
       ) : (
         <div>
+          <h4 className="text-center">Add New Food Item</h4>
           <div className="form-group">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Name:</label>
             <input
               type="text"
               className="form-control"
@@ -69,40 +72,39 @@ const AddFood = () => {
               name="name"
             />
           </div>
-
           <div className="form-group">
-            <label htmlFor="type">Type</label>
+            <label htmlFor="type" className="mt-2">Type:</label>
             <select className="form-control" id="type" name="type" required onChange={handleInputChange}>
-                {typeOptions.map(option => {
-                  return (
-                    <option 
-                      value={option}
-                      selected={option === "Misc" ? true : false}
-                    >
-                      {option}
-                    </option>
-                  )
-                })}
-              </select>
+              {typeOptions.map(option => {
+                return (
+                  <option
+                    value={option}
+                    selected={option === "Misc" ? true : false}
+                  >
+                    {option}
+                  </option>
+                )
+              })}
+            </select>
           </div>
-
           <div className="form-group">
-              <label htmlFor="daysToExp">Days to Expiration:</label>
-              <input
-                type="number"
-                step="1"
-                className="form-control"
-                id="daysToExp"
-                required
-                value={food.daysToExp}
-                onChange={handleInputChange}
-                name="daysToExp"
-              />
-            </div>
-
-          <button onClick={saveFood} className="btn btn-success">
-            Submit
-          </button>
+            <label htmlFor="daysToExp" className="mt-2">Days to Expiration:</label>
+            <input
+              type="number"
+              step="1"
+              className="form-control"
+              id="daysToExp"
+              required
+              value={food.daysToExp}
+              onChange={handleInputChange}
+              name="daysToExp"
+            />
+          </div>
+          <div className="text-center mt-3">
+            <button onClick={saveFood} className="btn btn-success">
+              Submit
+            </button>
+          </div>
         </div>
       )}
     </div>

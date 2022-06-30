@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import FoodManagerDataService from "../services/FoodManagerDataService";
 
-const MyFood = ({id, closeModal}) => {
-  // const { id } = useParams();
+const MyFood = ({ id, closeModal }) => {
   let navigate = useNavigate();
 
   const initialFoodState = {
@@ -13,7 +12,6 @@ const MyFood = ({id, closeModal}) => {
   };
 
   const [currentFood, setCurrentFood] = useState(initialFoodState);
-  const [message, setMessage] = useState("");
   const typeOptions = ["Vegetable", "Fruit", "Meat", "Dairy", "Frozen", "Packaged", "Misc"];
 
   const getFood = foodID => {
@@ -41,7 +39,6 @@ const MyFood = ({id, closeModal}) => {
     FoodManagerDataService.update(currentFood.id, currentFood)
       .then(response => {
         console.log(response.data);
-        setMessage("The food item was updated successfully!");
         closeModal();
       })
       .catch(e => {
@@ -62,81 +59,56 @@ const MyFood = ({id, closeModal}) => {
   };
 
   return (
-    <div>
-      {currentFood ? (
-        <div className="edit-form">
-          <h4>Food Item</h4>
-          <form>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                name="name"
-                value={currentFood.name}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="type">Type</label>
-              <select className="form-control" id="type" name="type" required onChange={handleInputChange}>
-                {typeOptions.map(option => {
-                  return (
-                    <option 
-                      value={option}
-                      selected={currentFood.type === option ? true : false}
-                    >
-                      {option}
-                    </option>
-                  )
-                })}
-              </select>
-            </div>
-            {/* <div className="form-group">
-              <label htmlFor="type">Type</label>
-              <input
-                type="text"
-                className="form-control"
-                id="type"
-                name="type"
-                value={currentFood.type}
-                onChange={handleInputChange}
-              />
-            </div> */}
-            <div className="form-group">
-              <label htmlFor="daysToExp">Days to Expiration:</label>
-              <input
-                type="number"
-                step="1"
-                className="form-control"
-                id="daysToExp"
-                name="daysToExp"
-                value={currentFood.daysToExp}
-                onChange={handleInputChange}
-              />
-            </div>
-          </form>
-
-          <button className="badge badge-danger mr-2" onClick={deleteFood}>
-            Delete
-          </button>
-
-          <button
-            type="submit"
-            className="badge badge-success"
-            onClick={updateFood}
-          >
-            Update
-          </button>
-          <p>{message}</p>
+    <div className="edit-form">
+      <h4 className="text-center">Edit Food Item</h4>
+      <form>
+        <div className="form-group">
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="name"
+            name="name"
+            value={currentFood.name}
+            onChange={handleInputChange}
+          />
         </div>
-      ) : (
-        <div>
-          <br />
-          <p>Please click on a Food Item...</p>
+        <div className="form-group">
+          <label htmlFor="type" className="mt-2">Type:</label>
+          <select className="form-control" id="type" name="type" required onChange={handleInputChange}>
+            {typeOptions.map(option => {
+              return (
+                <option
+                  value={option}
+                  selected={currentFood.type === option ? true : false}
+                >
+                  {option}
+                </option>
+              )
+            })}
+          </select>
         </div>
-      )}
+        <div className="form-group">
+          <label htmlFor="daysToExp" className="mt-2">Days to Expiration:</label>
+          <input
+            type="number"
+            step="1"
+            className="form-control"
+            id="daysToExp"
+            name="daysToExp"
+            value={currentFood.daysToExp}
+            onChange={handleInputChange}
+          />
+        </div>
+      </form>
+      <div className="text-center mt-3">
+        <button type="submit" className="btn btn-secondary" onClick={updateFood}>
+          Update
+        </button>
+        <button className="btn btn-danger ms-2" onClick={deleteFood}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 };

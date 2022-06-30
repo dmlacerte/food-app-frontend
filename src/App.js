@@ -11,21 +11,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <Link to={"/myfood"} className="navbar-brand">
-            bezKoder
+        <nav className="navbar navbar-expand navbar-dark bg-success">
+          <Link to={"/myfood"} className="navbar-brand pageHeader">
+            Save Your Food
           </Link>
           <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/myfood"} className="nav-link">
-                My Food
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to={"/add"} className="nav-link">
-                Add
-              </Link>
-            </li>
           </div>
         </nav>
 

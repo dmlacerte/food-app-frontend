@@ -65,11 +65,15 @@ const MyFoodList = () => {
     setSelectedType(ev.target.innerText);
   };
 
+  const resetType = () => {
+    setSelectedType(null);
+  }
+
   return (
     <div className="row">
       <div className="col-md-4">
-        <h4>Use It or Lose It</h4>
-        <p>Food expiring within the next
+        <h4 className={styles.sectionHeader}>Use It or Lose It</h4>
+        <p className="text-center">Food expiring within the next
           <div className={styles.expRangeForm}>
           <form>
             <select onChange={updateDateRange}>
@@ -96,9 +100,9 @@ const MyFoodList = () => {
                   className="list-group-item"
                   key={index}
                 >
-                  {foodItem.name}
+                  <p className={"mb-0 " + styles.foodName}>{foodItem.name}</p>
                   <div>
-                    <p>{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
+                    <p className="mb-0 text-muted">{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
                   </div>
                 </li>
                 : null
@@ -106,61 +110,68 @@ const MyFoodList = () => {
         </ul>
       </div>
       <div className="col-md-8">
-        <h4>My Pantry</h4>
+        <h4 className={styles.sectionHeader}>My Pantry</h4>
         <div className={styles.typeContainer}>
           {typeOptions.map(type => {
             return (
-              <div className={styles.typeOptions} onClick={filterOnType}>{type}</div>
+              <div className={styles.typeOptions + " " + (type === selectedType ? styles.selectedType : "")} onClick={filterOnType}>{type}</div>
             )
           })}
         </div>
-        <div className="col-md">
-          <div className="input-group mb-3">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search by name"
-              value={searchName}
-              onChange={onChangeSearchName}
-            />
-            <div className="input-group-append">
-              <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={findByName}
-              >
-                Search
-              </button>
+        <div className={styles.resetTypeContainer}>
+          <p className={styles.resetTypeButton} onClick={resetType}>Reset</p>
+        </div>
+        <div className={"mb-3 " + styles.pantryOptions}>
+          <div className="col-md-6">
+            <div className="input-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search by name"
+                value={searchName}
+                onChange={onChangeSearchName}
+              />
+              <div className="input-group-append">
+                <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  onClick={findByName}
+                >
+                  Search
+                </button>
+              </div>
             </div>
           </div>
+          <div>
+            <Container triggerText="Add" retrieveFoodItems={retrieveFoodItems} />
+            <button className="btn btn-outline-danger ms-2" onClick={removeAllFoodItems}>
+              Remove All
+            </button>
+          </div>
         </div>
-        <Container triggerText="add" retrieveFoodItems={retrieveFoodItems} />
         <ul className="list-group">
           {foodItems &&
             foodItems.map((foodItem, index) => {
               return (
                 !selectedType || selectedType === foodItem.type ?
                   <li
-                    className="list-group-item"
+                    className="list-group-item d-flex justify-content-between"
                     key={index}
                   >
-                    {foodItem.name}
                     <div>
-                      <p>{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
+                      <p className={"mb-0 " + styles.foodName}>{foodItem.name}</p>
+                      <div>
+                        <p className="mb-0 text-muted">{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
+                      </div>
                     </div>
-                    <Container triggerText="edit" id={foodItem.id} retrieveFoodItems={retrieveFoodItems} />
+                    <div className="d-flex">
+                      <Container triggerText="Edit" id={foodItem.id} retrieveFoodItems={retrieveFoodItems} />
+                    </div>
                   </li>
                   : null
               )
             })}
         </ul>
-
-        <button
-          className="m-3 btn btn-sm btn-danger"
-          onClick={removeAllFoodItems}
-        >
-          Remove All
-        </button>
       </div>
     </div>
   );

@@ -32,7 +32,7 @@ const Modal = ({ closeModal, triggerText, id }) => {
                         </svg>
                     </button>
                     <div className="modal-body">
-                        { triggerText === 'add' ? <AddFood /> : <MyFood id={id} closeModal={closeModal}/>}
+                        { triggerText === 'Add' ? <AddFood /> : <MyFood id={id} closeModal={closeModal}/>}
                     </div>
                 </div>
             </aside>
