@@ -4,8 +4,9 @@ import Container from "./Container.js";
 
 const MyFoodList = () => {
   const [foodItems, setFoodItems] = useState([]);
-  const [expiringFoodItems, setExpiringFoodItems] = useState([]);
   const [searchName, setSearchName] = useState("");
+  const [expDateRange, setExpDateRange] = useState(7);
+  const potentialDates = [1, 2, 3, 4, 5, 6, 7];
 
   useEffect(() => {
     retrieveFoodItems();
@@ -20,10 +21,7 @@ const MyFoodList = () => {
     FoodManagerDataService.getAll()
       .then(response => {
         setFoodItems(response.data);
-        const expiringFood = response.data.filter(food => food.daysToExp < 7);
-        setExpiringFoodItems(expiringFood);
         console.log(response.data);
-        console.log(expiringFood);
       })
       .catch(e => {
         console.log(e);
@@ -43,6 +41,10 @@ const MyFoodList = () => {
       .catch(e => {
         console.log(e);
       });
+  };
+
+  const updateDateRange = (ev) => {
+    setExpDateRange(ev.target.value);
   };
 
   const findByName = () => {
@@ -80,19 +82,37 @@ const MyFoodList = () => {
       </div>
       <div className="col-md-6">
         <h4>Use It or Lose It</h4>
-
+        <p>Food expiring within the next 
+          <form>
+            <select onChange={updateDateRange}>
+              {potentialDates.map(num => {
+                return (
+                  <option 
+                    value={num}
+                    selected={num === expDateRange ? true : false}
+                  >
+                    {num}
+                  </option>
+                )
+              })}
+            </select>
+          </form>
+          days
+        </p>
         <ul className="list-group">
-          {expiringFoodItems &&
-            expiringFoodItems.map((foodItem, index) => (
-              <li
-                className="list-group-item"
-                key={index}
-              >
-                {foodItem.name}
-                <div>
-                  <p>{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
-                </div>
-              </li>
+          {foodItems &&
+            foodItems.map((foodItem, index) => (
+              foodItem.daysToExp <= expDateRange ?  
+                  <li
+                    className="list-group-item"
+                    key={index}
+                  >
+                    {foodItem.name}
+                    <div>
+                      <p>{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
+                    </div>
+                  </li>
+                : null
             ))}
         </ul>
       </div>
