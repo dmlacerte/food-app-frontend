@@ -29,7 +29,7 @@ class App extends Component {
           </div>
         </nav>
 
-        <div className="container mt-3">
+        <div className="container mt-3 pageBody">
             <Routes>
               <Route path="/" element={<MyFoodList />} />
               <Route path="/myfood" element={<MyFoodList />} />

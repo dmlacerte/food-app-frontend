@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import FoodManagerDataService from "../services/FoodManagerDataService";
 import Container from "./Container.js";
+import styles from "./css/MyFoodList.module.css";
 
 const MyFoodList = () => {
   const [foodItems, setFoodItems] = useState([]);
   const [searchName, setSearchName] = useState("");
   const [expDateRange, setExpDateRange] = useState(7);
+  const [selectedType, setSelectedType] = useState(null);
+  const typeOptions = ["Vegetable", "Fruit", "Meat", "Dairy", "Frozen", "Packaged", "Misc"];
   const potentialDates = [1, 2, 3, 4, 5, 6, 7];
 
   useEffect(() => {
@@ -58,36 +61,21 @@ const MyFoodList = () => {
       });
   };
 
+  const filterOnType = (ev) => {
+    setSelectedType(ev.target.innerText);
+  };
+
   return (
-    <div className="list row">
-      <div className="col-md-8">
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search by name"
-            value={searchName}
-            onChange={onChangeSearchName}
-          />
-          <div className="input-group-append">
-            <button
-              className="btn btn-outline-secondary"
-              type="button"
-              onClick={findByName}
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="col-md-6">
+    <div className="row">
+      <div className="col-md-4">
         <h4>Use It or Lose It</h4>
-        <p>Food expiring within the next 
+        <p>Food expiring within the next
+          <div className={styles.expRangeForm}>
           <form>
             <select onChange={updateDateRange}>
               {potentialDates.map(num => {
                 return (
-                  <option 
+                  <option
                     value={num}
                     selected={num === expDateRange ? true : false}
                   >
@@ -97,12 +85,61 @@ const MyFoodList = () => {
               })}
             </select>
           </form>
-          days
+          </div>
+          days:
         </p>
         <ul className="list-group">
           {foodItems &&
             foodItems.map((foodItem, index) => (
-              foodItem.daysToExp <= expDateRange ?  
+              foodItem.daysToExp <= expDateRange ?
+                <li
+                  className="list-group-item"
+                  key={index}
+                >
+                  {foodItem.name}
+                  <div>
+                    <p>{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
+                  </div>
+                </li>
+                : null
+            ))}
+        </ul>
+      </div>
+      <div className="col-md-8">
+        <h4>My Pantry</h4>
+        <div className={styles.typeContainer}>
+          {typeOptions.map(type => {
+            return (
+              <div className={styles.typeOptions} onClick={filterOnType}>{type}</div>
+            )
+          })}
+        </div>
+        <div className="col-md">
+          <div className="input-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search by name"
+              value={searchName}
+              onChange={onChangeSearchName}
+            />
+            <div className="input-group-append">
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={findByName}
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+        <Container triggerText="add" retrieveFoodItems={retrieveFoodItems} />
+        <ul className="list-group">
+          {foodItems &&
+            foodItems.map((foodItem, index) => {
+              return (
+                !selectedType || selectedType === foodItem.type ?
                   <li
                     className="list-group-item"
                     key={index}
@@ -111,29 +148,11 @@ const MyFoodList = () => {
                     <div>
                       <p>{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
                     </div>
+                    <Container triggerText="edit" id={foodItem.id} retrieveFoodItems={retrieveFoodItems} />
                   </li>
-                : null
-            ))}
-        </ul>
-      </div>
-
-      <div className="col-md-6">
-        <h4>My Pantry</h4>
-        <Container triggerText="add" retrieveFoodItems={retrieveFoodItems}/>
-        <ul className="list-group">
-          {foodItems &&
-            foodItems.map((foodItem, index) => (
-              <li
-                className="list-group-item"
-                key={index}
-              >
-                {foodItem.name}
-                <div>
-                  <p>{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
-                </div>
-                <Container triggerText="edit" id={foodItem.id} retrieveFoodItems={retrieveFoodItems}/>
-              </li>
-            ))}
+                  : null
+              )
+            })}
         </ul>
 
         <button

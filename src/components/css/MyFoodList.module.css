@@ -1,0 +1,33 @@
+/* .contentContainer {
+    width: 100%;
+    display: inline-block;
+}
+
+.leftContainer {
+    width: 25%;
+}
+
+.rightContainer {
+    width: 75%;
+} */
+
+.expRangeForm {
+    display: inline-block;
+    margin: 0px 5px;
+}
+
+.typeContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.typeOptions {
+    background: lightblue;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 35px;
+}
