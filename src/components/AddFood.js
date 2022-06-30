@@ -11,6 +11,7 @@ const AddFood = () => {
 
   const [food, setFood] = useState(initialFoodState);
   const [submitted, setSubmitted] = useState(false);
+  const typeOptions = ["Vegetable", "Fruit", "Meat", "Dairy", "Frozen", "Packaged", "Misc"];
 
   const handleInputChange = ev => {
     const { name, value } = ev.target;
@@ -71,15 +72,18 @@ const AddFood = () => {
 
           <div className="form-group">
             <label htmlFor="type">Type</label>
-            <input
-              type="text"
-              className="form-control"
-              id="type"
-              required
-              value={food.type}
-              onChange={handleInputChange}
-              name="type"
-            />
+            <select className="form-control" id="type" name="type" required onChange={handleInputChange}>
+                {typeOptions.map(option => {
+                  return (
+                    <option 
+                      value={option}
+                      selected={option === "Misc" ? true : false}
+                    >
+                      {option}
+                    </option>
+                  )
+                })}
+              </select>
           </div>
 
           <div className="form-group">

@@ -14,6 +14,7 @@ const MyFood = ({id, closeModal}) => {
 
   const [currentFood, setCurrentFood] = useState(initialFoodState);
   const [message, setMessage] = useState("");
+  const typeOptions = ["Vegetable", "Fruit", "Meat", "Dairy", "Frozen", "Packaged", "Misc"];
 
   const getFood = foodID => {
     FoodManagerDataService.get(foodID)
@@ -79,6 +80,21 @@ const MyFood = ({id, closeModal}) => {
             </div>
             <div className="form-group">
               <label htmlFor="type">Type</label>
+              <select className="form-control" id="type" name="type" required onChange={handleInputChange}>
+                {typeOptions.map(option => {
+                  return (
+                    <option 
+                      value={option}
+                      selected={currentFood.type === option ? true : false}
+                    >
+                      {option}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+            {/* <div className="form-group">
+              <label htmlFor="type">Type</label>
               <input
                 type="text"
                 className="form-control"
@@ -87,7 +103,7 @@ const MyFood = ({id, closeModal}) => {
                 value={currentFood.type}
                 onChange={handleInputChange}
               />
-            </div>
+            </div> */}
             <div className="form-group">
               <label htmlFor="daysToExp">Days to Expiration:</label>
               <input

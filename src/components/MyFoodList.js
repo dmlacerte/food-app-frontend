@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import FoodManagerDataService from "../services/FoodManagerDataService";
-import { Link } from "react-router-dom";
 import Container from "./Container.js";
 
 const MyFoodList = () => {
@@ -124,39 +123,6 @@ const MyFoodList = () => {
           Remove All
         </button>
       </div>
-
-      {/* <div className="col-md-6">
-        {currentFoodItem ? (
-          <div>
-            <h4>Food Item</h4>
-            <div>
-              <label>
-                <strong>Name:</strong>
-              </label>{" "}
-              {currentFoodItem.name}
-            </div>
-            <div>
-              <label>
-                <strong>Type:</strong>
-              </label>{" "}
-              {currentFoodItem.type}
-            </div>
-            <button>
-              <Link
-                to={"/myfood/" + currentFoodItem.id}
-                className="badge badge-warning"
-              >
-                Edit
-              </Link>
-            </button>
-          </div>
-        ) : (
-          <div>
-            <br />
-            <p>Please click on a Food Item...</p>
-          </div>
-        )}
-      </div> */}
     </div>
   );
 };
