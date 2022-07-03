@@ -5,7 +5,7 @@ const AddFood = () => {
   const initialFoodState = {
     id: null,
     name: "",
-    type: "",
+    type: "Misc",
     daysToExp: 0,
   };
 

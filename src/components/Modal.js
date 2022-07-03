@@ -13,12 +13,9 @@ const Modal = ({ closeModal, triggerText, id }) => {
                 tabIndex="-1"
                 aria-modal="true"
                 className="modal-cover"
-                // onClick={onClickOutside}
-                // onKeyDown={onKeyDown}
             >
-                <div className="modal-area" /* ref={modalRef} */>
+                <div className="modal-area">
                     <button
-                        // ref={buttonRef}
                         aria-label="Close Modal"
                         aria-labelledby="close-modal"
                         className="_modal-close"
