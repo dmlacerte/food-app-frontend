@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import MyFoodList from "./components/MyFoodList";
+import MyMealPlan from "./components/MyMealPlan";
 
 class App extends Component {
   render() {
@@ -13,13 +14,24 @@ class App extends Component {
           <Link to={"/"} className="navbar-brand pageHeader">
             Save Your Food
           </Link>
-          <div className="navbar-nav mr-auto">
+          <div className="navbar-nav ms-auto">
+            <li className="nav-item">
+              <Link to={"/"} className="nav-link">
+                My Pantry
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/mymealplan"} className="nav-link">
+                Meal Planning
+              </Link>
+            </li>
           </div>
         </nav>
 
         <div className="container mt-3 pageBody">
             <Routes>
               <Route path="/" element={<MyFoodList />} />
+              <Route path="/mymealplan" element={<MyMealPlan />} />
             </Routes>
         </div>
       </div>

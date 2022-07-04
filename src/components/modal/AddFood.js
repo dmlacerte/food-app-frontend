@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FoodManagerDataService from "../services/FoodManagerDataService";
+import FoodManagerDataService from "../../services/FoodManagerDataService";
 
 const AddFood = () => {
   const initialFoodState = {

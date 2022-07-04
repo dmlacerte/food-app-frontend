@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import FoodManagerDataService from "../services/FoodManagerDataService";
+import FoodManagerDataService from "../../services/FoodManagerDataService";
 
 const MyFood = ({ id, closeModal }) => {
   let navigate = useNavigate();
@@ -50,7 +50,7 @@ const MyFood = ({ id, closeModal }) => {
     FoodManagerDataService.remove(currentFood.id)
       .then(response => {
         console.log(response.data);
-        navigate("/myfood");
+        navigate("/");
         closeModal();
       })
       .catch(e => {
