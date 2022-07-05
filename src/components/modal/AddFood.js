@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FoodManagerDataService from "../../services/FoodManagerDataService";
+import GroceryManagerDataService from "../../services/GroceryManagerDataService";
 
-const AddFood = () => {
+const AddFood = ({ id }) => {
   const initialFoodState = {
     id: null,
     name: "",
@@ -11,6 +12,7 @@ const AddFood = () => {
 
   const [food, setFood] = useState(initialFoodState);
   const [submitted, setSubmitted] = useState(false);
+  const [checkedGroceryIDs, setCheckedGroceryIDs] = useState(id);
   const typeOptions = ["Vegetable", "Fruit", "Meat", "Dairy", "Frozen", "Packaged", "Misc"];
 
   const handleInputChange = ev => {
@@ -34,6 +36,17 @@ const AddFood = () => {
           daysToExp: response.data.daysToExp
         });
         setSubmitted(true);
+
+        if (checkedGroceryIDs && checkedGroceryIDs.length > 0) {
+          deleteGroceryItem();
+          
+          let newcheckedGroceryIDs = [...checkedGroceryIDs];
+          console.log(newcheckedGroceryIDs)
+          newcheckedGroceryIDs.shift();
+          console.log(newcheckedGroceryIDs)
+          setCheckedGroceryIDs(newcheckedGroceryIDs);
+        }
+
         console.log(response.data);
       })
       .catch(e => {
@@ -46,9 +59,40 @@ const AddFood = () => {
     setSubmitted(false);
   };
 
+  const checkForGrocery = () => {
+    let newFoodState = {...initialFoodState};
+    
+    if (checkedGroceryIDs && checkedGroceryIDs.length > 0) {
+      GroceryManagerDataService.get(checkedGroceryIDs[0])
+        .then(response => {
+          newFoodState.name = response.data.name;
+          newFoodState.type = response.data.type;
+          setFood(newFoodState);
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+  };
+
+  const deleteGroceryItem = () => {
+    GroceryManagerDataService.remove(checkedGroceryIDs[0])
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    checkForGrocery();
+  }, [submitted]);
+
   return (
     <div className="submit-form">
-      {submitted ? (
+      {submitted && (!checkedGroceryIDs || checkedGroceryIDs.length === 0) ? (
         <div>
           <h4>You submitted successfully!</h4>
           <div className="text-center mt-3">
@@ -79,7 +123,7 @@ const AddFood = () => {
                 return (
                   <option
                     value={option}
-                    selected={option === "Misc" ? true : false}
+                    selected={option === food.type ? true : false}
                   >
                     {option}
                   </option>

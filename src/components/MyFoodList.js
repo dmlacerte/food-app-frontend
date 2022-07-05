@@ -174,7 +174,7 @@ const MyFoodList = () => {
           <div>
             <Container 
               triggerText="Add" 
-              retrieveFoodItems={retrieveFoodItems} 
+              retrieveItems={retrieveFoodItems} 
             />
             <button className="btn btn-outline-danger ms-2" onClick={removeAllFoodItems}>
               Remove All
@@ -203,9 +203,9 @@ const MyFoodList = () => {
                         changeUseThisWeekValue={changeUseThisWeekValue}
                       />
                       <Container 
-                        triggerText="Edit" 
+                        triggerText="Update" 
                         id={foodItem.id} 
-                        retrieveFoodItems={retrieveFoodItems} 
+                        retrieveItems={retrieveFoodItems} 
                       />
                     </div>
                   </li>

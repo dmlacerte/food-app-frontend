@@ -3,8 +3,27 @@ import FocusTrap from 'focus-trap-react';
 import ReactDOM from 'react-dom';
 import AddFood from './AddFood';
 import MyFood from './MyFood';
+import MyGrocery from './MyGrocery';
+import AddGrocery from './AddGrocery';
+import AddWeeklyFood from './AddWeeklyFood';
 
 const Modal = ({ closeModal, triggerText, id }) => {
+
+    let determineModal = null;
+    
+    if (triggerText === 'Add' || triggerText === 'Add to Pantry') {
+        determineModal = <AddFood id={id}/>;
+    } else if (triggerText === 'Update') {
+        determineModal = <MyFood id={id} closeModal={closeModal} />;
+    } else if (triggerText === 'Edit') {
+        determineModal = <MyGrocery id={id} closeModal={closeModal} />;
+    } else if (triggerText === 'Add Grocery') {
+        determineModal = <AddGrocery />;
+    } else if (triggerText === 'Add Pantry') {
+        determineModal = <AddWeeklyFood />;
+    }
+
+
     return ReactDOM.createPortal(
         <FocusTrap>
             <aside
@@ -29,7 +48,7 @@ const Modal = ({ closeModal, triggerText, id }) => {
                         </svg>
                     </button>
                     <div className="modal-body">
-                        { triggerText === 'Add' ? <AddFood /> : <MyFood id={id} closeModal={closeModal}/>}
+                        {determineModal}
                     </div>
                 </div>
             </aside>

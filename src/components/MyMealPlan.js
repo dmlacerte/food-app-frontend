@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styles from "./css/MyMealPlan.module.css";
 import FoodManagerDataService from "../services/FoodManagerDataService";
+import GroceryManagerDataService from "../services/GroceryManagerDataService";
+import Container from "./modal/Container";
 
 const MyMealPlan = () => {
     const [foodItems, setFoodItems] = useState([]);
+    const [groceryItems, setGroceryItems] = useState([]);
     const [checkedPantryIDs, setCheckedPantryIDs] = useState([]);
+    const [checkedGroceryIDs, setCheckedGroceryIDs] = useState([]);
 
     const retrieveFoodItems = () => {
         FoodManagerDataService.getAll()
@@ -17,15 +21,20 @@ const MyMealPlan = () => {
             });
     };
 
-    const addToGroceryList = () => {
-
+    const retrieveGroceryItems = () => {
+        GroceryManagerDataService.getAll()
+            .then(response => {
+                setGroceryItems(response.data);
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        
+        setCheckedGroceryIDs([]);
     };
 
-    const addToPantryList = () => {
-
-    };
-
-    const updateSelectedIDs = (id) => {
+    const updateSelectedPantryIDs = (id) => {
         const newCheckedList = [...checkedPantryIDs];
         const index = newCheckedList.findIndex(x => x === id);
 
@@ -36,7 +45,35 @@ const MyMealPlan = () => {
         }
 
         setCheckedPantryIDs(newCheckedList);
-    }
+    };
+
+    const updateSelectedGroceryIDs = (id) => {
+        const newCheckedList = [...checkedGroceryIDs];
+        const index = newCheckedList.findIndex(x => x === id);
+
+        if (index >= 0) {
+            newCheckedList.splice(index, 1);
+        } else {
+            newCheckedList.push(id);
+        }
+
+        setCheckedGroceryIDs(newCheckedList);
+    };
+
+    const removeFromGroceryList = () => {
+        checkedGroceryIDs.map(id => {
+            GroceryManagerDataService.remove(id)
+                .then(response => {
+                    console.log(response.data);
+                    retrieveGroceryItems();
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        })
+
+        setCheckedGroceryIDs([]);
+    };
 
     const removeFromWeeklyPlan = () => {
         checkedPantryIDs.map(id => {
@@ -49,9 +86,9 @@ const MyMealPlan = () => {
                     console.log(e);
                 });
         })
-        
+
         setCheckedPantryIDs([]);
-    }
+    };
 
     const removeFromPantry = () => {
         checkedPantryIDs.map(id => {
@@ -64,12 +101,13 @@ const MyMealPlan = () => {
                     console.log(e);
                 });
         })
-        
+
         setCheckedPantryIDs([]);
-    }
+    };
 
     useEffect(() => {
         retrieveFoodItems();
+        retrieveGroceryItems();
     }, []);
 
     return (
@@ -77,23 +115,57 @@ const MyMealPlan = () => {
             <div className="col-md-4">
                 <h3 className={styles.sectionHeader}>Food To Use This Week</h3>
                 <div className="d-flex justify-content-center">
-                    <button
-                        className="btn btn-outline-success"
-                        type="button"
-                        onClick={addToGroceryList}
-                    >
-                        Add Grocery
-                    </button>
-                    <button
-                        className="btn btn-outline-success ms-2"
-                        type="button"
-                        onClick={addToPantryList}
-                    >
-                        Add Pantry
-                    </button>
+                    <Container
+                        triggerText="Add Grocery"
+                        retrieveItems={retrieveGroceryItems}
+                    />
+                    <Container
+                        triggerText="Add Pantry"
+                        retrieveItems={retrieveFoodItems}
+                    />
                 </div>
-                <div className="row border border-secondary mt-3">
+                <div className="row border border-secondary mt-4">
                     <h4 className={"pt-2 " + styles.sectionHeader}>Grocery</h4>
+                    <ul className="list-group p-2">
+                        {groceryItems && groceryItems.map((groceryItem, index) => (
+                                <li
+                                    className="list-group-item d-flex"
+                                    key={index}
+                                >
+                                    <input
+                                        className="form-check-input align-self-center me-2"
+                                        type="checkbox"
+                                        value=""
+                                        id="flexCheckDefault"
+                                        onClick={() => updateSelectedGroceryIDs(groceryItem.id)}
+                                        checked={checkedGroceryIDs.includes(groceryItem.id) ? true : false}
+                                    >
+                                    </input>
+                                    <div>
+                                        <p className={"mb-0 " + styles.foodName}>{groceryItem.name}</p>
+                                        <div>
+                                            <p className="mb-0 text-muted">{groceryItem.type}</p>
+                                        </div>
+                                    </div>
+                                <div>
+                                    <Container
+                                        triggerText="Edit"
+                                        id={groceryItem.id}
+                                        retrieveItems={retrieveGroceryItems}
+                                    />
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                    <div className={"d-flex justify-content-center " + (checkedGroceryIDs.length === 0 ? "d-none" : null)}>
+                        {/* <p className={"me-2 " + styles.pantryButtons} onClick={addToPantry}>Add to Pantry</p> */}
+                        <Container
+                            triggerText="Add to Pantry"
+                            id={checkedGroceryIDs}
+                            retrieveItems={retrieveGroceryItems}
+                        />
+                        <p className={styles.pantryButtons} onClick={removeFromGroceryList}>Remove From Grocery List</p>
+                    </div>
                 </div>
                 <div className="row border border-secondary mt-4">
                     <h4 className={"pt-2 " + styles.sectionHeader}>Pantry</h4>
@@ -104,12 +176,12 @@ const MyMealPlan = () => {
                                     className="list-group-item d-flex"
                                     key={index}
                                 >
-                                    <input 
-                                        className="form-check-input align-self-center me-2" 
-                                        type="checkbox" 
-                                        value="" 
-                                        id="flexCheckDefault" 
-                                        onClick={() => updateSelectedIDs(foodItem.id)}
+                                    <input
+                                        className="form-check-input align-self-center me-2"
+                                        type="checkbox"
+                                        value=""
+                                        id="flexCheckDefault"
+                                        onClick={() => updateSelectedPantryIDs(foodItem.id)}
                                         checked={checkedPantryIDs.includes(foodItem.id) ? true : false}
                                     >
                                     </input>

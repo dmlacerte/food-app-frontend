@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from './Modal.js';
 import TriggerButton from './TriggerButton.js'
 
-const Container = ({triggerText, id, retrieveFoodItems}) => {
+const Container = ({triggerText, id, retrieveItems}) => {
     const [isShown, setIsShown] = useState(false);
     const foodId = id ? id : null;
 
@@ -12,7 +12,7 @@ const Container = ({triggerText, id, retrieveFoodItems}) => {
 
     const closeModal = () => {
         setIsShown(false);
-        retrieveFoodItems();
+        retrieveItems();
     }
 
     return (
