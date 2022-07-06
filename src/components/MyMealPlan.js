@@ -10,10 +10,26 @@ const MyMealPlan = () => {
     const [checkedPantryIDs, setCheckedPantryIDs] = useState([]);
     const [checkedGroceryIDs, setCheckedGroceryIDs] = useState([]);
 
+    const compareItems = (a, b) => {
+        const itemA = a.name.toUpperCase();
+        const itemB = b.name.toUpperCase();
+    
+        let compare = 0;
+        if (itemA > itemB) {
+          compare = 1;
+        } else if (itemA < itemB) {
+          compare = -1;
+        }
+    
+        return compare;
+    };
+
     const retrieveFoodItems = () => {
         FoodManagerDataService.getAll()
             .then(response => {
-                setFoodItems(response.data);
+                let newFoodItems = response.data;
+                newFoodItems.sort(compareItems);
+                setFoodItems(newFoodItems);
                 console.log(response.data);
             })
             .catch(e => {
@@ -24,13 +40,15 @@ const MyMealPlan = () => {
     const retrieveGroceryItems = () => {
         GroceryManagerDataService.getAll()
             .then(response => {
-                setGroceryItems(response.data);
+                let newGroceryItems = response.data;
+                newGroceryItems.sort(compareItems);
+                setGroceryItems(newGroceryItems);
                 console.log(response.data);
             })
             .catch(e => {
                 console.log(e);
             });
-        
+
         setCheckedGroceryIDs([]);
     };
 

@@ -21,10 +21,26 @@ const MyFoodList = () => {
     setSearchName(newSearchName);
   };
 
+  const compareItems = (a, b) => {
+    const itemA = a.name.toUpperCase();
+    const itemB = b.name.toUpperCase();
+
+    let compare = 0;
+    if (itemA > itemB) {
+      compare = 1;
+    } else if (itemA < itemB) {
+      compare = -1;
+    }
+
+    return compare;
+  };
+
   const retrieveFoodItems = () => {
     FoodManagerDataService.getAll()
       .then(response => {
-        setFoodItems(response.data);
+        let newFoodItems = response.data;
+        newFoodItems.sort(compareItems);
+        setFoodItems(newFoodItems);
         console.log(response.data);
       })
       .catch(e => {

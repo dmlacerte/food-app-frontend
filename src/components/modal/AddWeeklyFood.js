@@ -7,10 +7,27 @@ const AddWeeklyFood = () => {
     const [foodOptions, setFoodOptions] = useState([]);
     const [submitted, setSubmitted] = useState(false);
 
+    const compareItems = (a, b) => {
+        const itemA = a.name.toUpperCase();
+        const itemB = b.name.toUpperCase();
+    
+        let compare = 0;
+        if (itemA > itemB) {
+          compare = 1;
+        } else if (itemA < itemB) {
+          compare = -1;
+        }
+    
+        return compare;
+    };
+
     const retrieveFoodItems = () => {
         FoodManagerDataService.getAll()
             .then(response => {
-                setFoodOptions(response.data);
+                let newFoodItems = response.data.filter(x => !x.useThisWeek);
+                console.log(newFoodItems);
+                newFoodItems.sort(compareItems);
+                setFoodOptions(newFoodItems);
                 console.log(response.data);
             })
             .catch(e => {
