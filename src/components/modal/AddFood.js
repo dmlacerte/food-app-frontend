@@ -8,6 +8,7 @@ const AddFood = ({ id }) => {
     name: "",
     type: "Misc",
     daysToExp: 0,
+    useThisWeek: false
   };
 
   const [food, setFood] = useState(initialFoodState);
@@ -16,7 +17,9 @@ const AddFood = ({ id }) => {
   const typeOptions = ["Vegetable", "Fruit", "Meat", "Dairy", "Frozen", "Packaged", "Misc"];
 
   const handleInputChange = ev => {
-    const { name, value } = ev.target;
+    let { name, value } = ev.target;
+    if (name === "useThisWeek") value = !food.useThisWeek;
+
     setFood({ ...food, [name]: value });
   };
 
@@ -24,7 +27,8 @@ const AddFood = ({ id }) => {
     let data = {
       name: food.name,
       type: food.type,
-      daysToExp: food.daysToExp
+      daysToExp: food.daysToExp,
+      useThisWeek: food.useThisWeek
     };
 
     FoodManagerDataService.create(data)
@@ -33,7 +37,8 @@ const AddFood = ({ id }) => {
           id: response.data.id,
           name: response.data.name,
           type: response.data.type,
-          daysToExp: response.data.daysToExp
+          daysToExp: response.data.daysToExp,
+          useThisWeek: response.data.useThisWeek
         });
         setSubmitted(true);
 
@@ -143,7 +148,13 @@ const AddFood = ({ id }) => {
               onChange={handleInputChange}
               name="daysToExp"
             />
-          </div>
+            </div>
+            <div className="form-check mt-2">
+              <input className="form-check-input" type="checkbox" name="useThisWeek" value={food.useThisWeek} id="useThisWeek" onChange={handleInputChange} />
+                <label className="form-check-label" htmlFor="useThisWeek">
+                  Add to Weekly Meal Plan?
+                </label>
+            </div>
           <div className="text-center mt-3">
             <button onClick={saveFood} className="btn btn-success">
               Submit

@@ -25,9 +25,9 @@ const AddWeeklyFood = () => {
         FoodManagerDataService.getAll()
             .then(response => {
                 let newFoodItems = response.data.filter(x => !x.useThisWeek);
-                console.log(newFoodItems);
                 newFoodItems.sort(compareItems);
                 setFoodOptions(newFoodItems);
+                setFood(newFoodItems[0].name);
                 console.log(response.data);
             })
             .catch(e => {
@@ -43,7 +43,6 @@ const AddWeeklyFood = () => {
     const changeUseThisWeekValue = () => {
         const index = foodOptions.findIndex(x => x.name === food);
         const changeID = foodOptions[index].id;
-        console.log(changeID);
 
         FoodManagerDataService.updateUseThisWeek(changeID, true)
             .then(response => {
@@ -56,7 +55,7 @@ const AddWeeklyFood = () => {
     };
 
     const newFood = () => {
-        setFood("");
+        retrieveFoodItems();
         setSubmitted(false);
     };
 
