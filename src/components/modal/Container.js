@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from './Modal.js';
-import TriggerButton from './TriggerButton.js'
+import TriggerButton from './TriggerButton.js';
+import TriggerText from './TriggerText.js';
 
 const Container = ({triggerText, id, retrieveItems}) => {
     const [isShown, setIsShown] = useState(false);
@@ -17,10 +18,16 @@ const Container = ({triggerText, id, retrieveItems}) => {
 
     return (
         <>
-            <TriggerButton 
+            { triggerText === 'Add to Pantry' 
+            ? <TriggerText 
                 triggerText={triggerText}
                 showModal={showModal}
             />
+            : <TriggerButton 
+                triggerText={triggerText}
+                showModal={showModal}
+            />
+            }
             { isShown ? (
                 <Modal 
                  closeModal={closeModal}

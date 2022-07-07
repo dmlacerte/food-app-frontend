@@ -39,7 +39,7 @@ const MyFoodList = () => {
     FoodManagerDataService.getAll()
       .then(response => {
         let newFoodItems = response.data;
-        newFoodItems.sort(compareItems);
+        if (newFoodItems.length > 0) newFoodItems.sort(compareItems);
         setFoodItems(newFoodItems);
         console.log(response.data);
       })

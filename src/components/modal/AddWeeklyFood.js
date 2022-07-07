@@ -25,7 +25,7 @@ const AddWeeklyFood = () => {
         FoodManagerDataService.getAll()
             .then(response => {
                 let newFoodItems = response.data.filter(x => !x.useThisWeek);
-                newFoodItems.sort(compareItems);
+                if (newFoodItems.length > 0) newFoodItems.sort(compareItems);
                 setFoodOptions(newFoodItems);
                 setFood(newFoodItems[0].name);
                 console.log(response.data);

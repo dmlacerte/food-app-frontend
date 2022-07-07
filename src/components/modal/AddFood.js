@@ -44,7 +44,7 @@ const AddFood = ({ id }) => {
 
         if (checkedGroceryIDs && checkedGroceryIDs.length > 0) {
           deleteGroceryItem();
-          
+
           let newcheckedGroceryIDs = [...checkedGroceryIDs];
           console.log(newcheckedGroceryIDs)
           newcheckedGroceryIDs.shift();
@@ -65,8 +65,8 @@ const AddFood = ({ id }) => {
   };
 
   const checkForGrocery = () => {
-    let newFoodState = {...initialFoodState};
-    
+    let newFoodState = { ...initialFoodState };
+
     if (checkedGroceryIDs && checkedGroceryIDs.length > 0) {
       GroceryManagerDataService.get(checkedGroceryIDs[0])
         .then(response => {
@@ -148,13 +148,21 @@ const AddFood = ({ id }) => {
               onChange={handleInputChange}
               name="daysToExp"
             />
-            </div>
-            <div className="form-check mt-2">
-              <input className="form-check-input" type="checkbox" name="useThisWeek" value={food.useThisWeek} id="useThisWeek" onChange={handleInputChange} />
-                <label className="form-check-label" htmlFor="useThisWeek">
-                  Add to Weekly Meal Plan?
-                </label>
-            </div>
+          </div>
+          <div className="form-check mt-2">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              name="useThisWeek"
+              value={food.useThisWeek}
+              id="useThisWeek"
+              onChange={handleInputChange}
+              checked={food.useThisWeek ? true : false}
+            />
+            <label className="form-check-label" htmlFor="useThisWeek">
+              Add to Weekly Meal Plan?
+            </label>
+          </div>
           <div className="text-center mt-3">
             <button onClick={saveFood} className="btn btn-success">
               Submit

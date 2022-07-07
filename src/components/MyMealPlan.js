@@ -13,14 +13,14 @@ const MyMealPlan = () => {
     const compareItems = (a, b) => {
         const itemA = a.name.toUpperCase();
         const itemB = b.name.toUpperCase();
-    
+
         let compare = 0;
         if (itemA > itemB) {
-          compare = 1;
+            compare = 1;
         } else if (itemA < itemB) {
-          compare = -1;
+            compare = -1;
         }
-    
+
         return compare;
     };
 
@@ -28,9 +28,8 @@ const MyMealPlan = () => {
         FoodManagerDataService.getAll()
             .then(response => {
                 let newFoodItems = response.data;
-                newFoodItems.sort(compareItems);
+                if (newFoodItems.length > 0) newFoodItems.sort(compareItems);
                 setFoodItems(newFoodItems);
-                console.log(response.data);
             })
             .catch(e => {
                 console.log(e);
@@ -41,9 +40,8 @@ const MyMealPlan = () => {
         GroceryManagerDataService.getAll()
             .then(response => {
                 let newGroceryItems = response.data;
-                newGroceryItems.sort(compareItems);
+                if (newGroceryItems.length > 0) newGroceryItems.sort(compareItems);
                 setGroceryItems(newGroceryItems);
-                console.log(response.data);
             })
             .catch(e => {
                 console.log(e);
@@ -146,10 +144,11 @@ const MyMealPlan = () => {
                     <h4 className={"pt-2 " + styles.sectionHeader}>Grocery</h4>
                     <ul className="list-group p-2">
                         {groceryItems && groceryItems.map((groceryItem, index) => (
-                                <li
-                                    className="list-group-item d-flex"
-                                    key={index}
-                                >
+                            <li
+                                className="list-group-item d-flex justify-content-between"
+                                key={index}
+                            >
+                                <div className="d-flex">
                                     <input
                                         className="form-check-input align-self-center me-2"
                                         type="checkbox"
@@ -165,7 +164,8 @@ const MyMealPlan = () => {
                                             <p className="mb-0 text-muted">{groceryItem.type}</p>
                                         </div>
                                     </div>
-                                <div>
+                                </div>
+                                <div className="d-flex">
                                     <Container
                                         triggerText="Edit"
                                         id={groceryItem.id}
@@ -176,11 +176,13 @@ const MyMealPlan = () => {
                         ))}
                     </ul>
                     <div className={"d-flex justify-content-center " + (checkedGroceryIDs.length === 0 ? "d-none" : null)}>
-                        {/* <p className={"me-2 " + styles.pantryButtons} onClick={addToPantry}>Add to Pantry</p> */}
                         <Container
                             triggerText="Add to Pantry"
                             id={checkedGroceryIDs}
-                            retrieveItems={retrieveGroceryItems}
+                            retrieveItems={() => {
+                                retrieveGroceryItems();
+                                retrieveFoodItems();
+                            }}
                         />
                         <p className={styles.pantryButtons} onClick={removeFromGroceryList}>Remove From Grocery List</p>
                     </div>
