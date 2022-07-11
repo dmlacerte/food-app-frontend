@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-success">
+        <nav className="navbar navbar-expand navbar-dark bg-success ps-2">
           <Link to={"/"} className="navbar-brand pageHeader">
             Save Your Food
           </Link>
@@ -28,7 +28,7 @@ class App extends Component {
           </div>
         </nav>
 
-        <div className="container mt-3 pageBody">
+        <div className="mt-3 pageBody">
             <Routes>
               <Route path="/" element={<MyFoodList />} />
               <Route path="/mymealplan" element={<MyMealPlan />} />

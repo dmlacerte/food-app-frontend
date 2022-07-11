@@ -3,12 +3,14 @@ import styles from "./css/MyMealPlan.module.css";
 import FoodManagerDataService from "../services/FoodManagerDataService";
 import GroceryManagerDataService from "../services/GroceryManagerDataService";
 import Container from "./modal/Container";
+import MealPlanSpace from "./modal/MealPlanSpaces";
 
 const MyMealPlan = () => {
     const [foodItems, setFoodItems] = useState([]);
     const [groceryItems, setGroceryItems] = useState([]);
     const [checkedPantryIDs, setCheckedPantryIDs] = useState([]);
     const [checkedGroceryIDs, setCheckedGroceryIDs] = useState([]);
+    const potentialDates = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
     const compareItems = (a, b) => {
         const itemA = a.name.toUpperCase();
@@ -128,7 +130,7 @@ const MyMealPlan = () => {
 
     return (
         <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-3 me-4">
                 <h3 className={styles.sectionHeader}>Food To Use This Week</h3>
                 <div className="d-flex justify-content-center">
                     <Container
@@ -221,8 +223,70 @@ const MyMealPlan = () => {
                     </div>
                 </div>
             </div>
-            <div className="col-md-8">
+            <div className="col-md-8 ms-4">
                 <h3 className={styles.sectionHeader}>Weekly Meal Planner</h3>
+                {/* <div className="row d-flex">
+                    <div className="col me-2">
+                        <p></p>
+                        <p className={"row align-self-center " + styles.title}>Breakfast</p>
+                        <p className={"row align-self-center " + styles.title}>Lunch</p>
+                        <p className={"row align-self-center " + styles.title}>Dinner</p>
+                        <p className={"row align-self-center " + styles.title}>Snacks</p>
+                    </div>
+                    {potentialDates.map(day => (
+                        <div className="col pe-2 text-center">
+                            <p className={"row align-self-center " + styles.title}>{day}</p>
+                            <MealPlanSpaces className={"row align-self-center " + styles.title} id={day} time="Breakfast" />
+                            <MealPlanSpaces className={"row align-self-center " + styles.title} id={day} time="Lunch" />
+                            <MealPlanSpaces className={"row align-self-center " + styles.title} id={day} time="Dinner" />
+                            <MealPlanSpaces className={"row align-self-center " + styles.title} id={day} time="Snacks" />
+                        </div>
+                    ))}
+                </div> */}
+                <div className="row d-flex">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                {potentialDates.map(date => (
+                                    <th scope="col">{date}</th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Breakfast</th>
+                                {potentialDates.map(date => (
+                                    // <MealPlanSpace day={date} time="Breakfast" />
+                                    <Container
+                                        triggerText=""
+                                        retrieveItems={retrieveGroceryItems}
+                                        day={date}
+                                        time="Breakfast"
+                                    />
+                                ))}
+                            </tr>
+                            <tr>
+                                <th scope="row">Lunch</th>
+                                {potentialDates.map(date => (
+                                    <MealPlanSpace day={date} time="Lunch" />
+                                ))}
+                            </tr>
+                            <tr>
+                                <th scope="row">Dinner</th>
+                                {potentialDates.map(date => (
+                                    <MealPlanSpace day={date} time="Dinner" />
+                                ))}
+                            </tr>
+                            <tr>
+                                <th scope="row">Snacks</th>
+                                {potentialDates.map(date => (
+                                    <MealPlanSpace day={date} time="Snacks" />
+                                ))}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     )
