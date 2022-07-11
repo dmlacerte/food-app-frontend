@@ -260,7 +260,6 @@ const MyMealPlan = () => {
                                     // <MealPlanSpace day={date} time="Breakfast" />
                                     <Container
                                         triggerText=""
-                                        retrieveItems={retrieveGroceryItems}
                                         day={date}
                                         time="Breakfast"
                                     />

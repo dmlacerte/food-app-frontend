@@ -27,20 +27,20 @@ const AddMealPlan = ({ day, time }) => {
       description: mealPlanToSubmit.description
     };
 
-    // MealPlanDataService.create(data)
-    //   .then(response => {
-    //     setMealPlanToSubmit({
-    //       id: response.data.id,
-    //       name: response.data.name,
-    //       type: response.data.type,
-    //       description: response.data.description
-    //     });
-    //     setSubmitted(true);
-    //     console.log(response.data);
-    //   })
-    //   .catch(e => {
-    //     console.log(e);
-    //   });
+    MealPlanDataService.create(data)
+      .then(response => {
+        setMealPlanToSubmit({
+          id: response.data.id,
+          name: response.data.name,
+          type: response.data.type,
+          description: response.data.description
+        });
+        setSubmitted(true);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   const newMealPlan = () => {
