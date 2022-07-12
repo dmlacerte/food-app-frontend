@@ -7,7 +7,7 @@ const AddFood = ({ id }) => {
     id: null,
     name: "",
     type: "Misc",
-    daysToExp: 0,
+    expDate: "yyyy-mm-dd",
     useThisWeek: false
   };
 
@@ -27,7 +27,7 @@ const AddFood = ({ id }) => {
     let data = {
       name: food.name,
       type: food.type,
-      daysToExp: food.daysToExp,
+      expDate: food.expDate,
       useThisWeek: food.useThisWeek
     };
 
@@ -37,7 +37,7 @@ const AddFood = ({ id }) => {
           id: response.data.id,
           name: response.data.name,
           type: response.data.type,
-          daysToExp: response.data.daysToExp,
+          expDate: response.data.expDate,
           useThisWeek: response.data.useThisWeek
         });
         setSubmitted(true);
@@ -137,16 +137,16 @@ const AddFood = ({ id }) => {
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="daysToExp" className="mt-2">Days to Expiration:</label>
+            <label htmlFor="expDate" className="mt-2">Expiration Date:</label>
             <input
-              type="number"
+              type="date"
               step="1"
               className="form-control"
-              id="daysToExp"
+              id="expDate"
               required
-              value={food.daysToExp}
+              value={food.expDate}
               onChange={handleInputChange}
-              name="daysToExp"
+              name="expDate"
             />
           </div>
           <div className="form-check mt-2">

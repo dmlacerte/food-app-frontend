@@ -101,6 +101,15 @@ const MyFoodList = () => {
       });
   };
 
+  const calcDate = (expDateStr) => {
+    const expDate = new Date(expDateStr);
+    const expDateTime = expDate.getTime();
+    
+    const today = new Date();
+
+    return (Math.floor((expDateTime-today)/(24*3600*1000)) + 1);
+  };
+
   return (
     <div className="row">
       <div className="col-md-4">
@@ -131,7 +140,7 @@ const MyFoodList = () => {
         <ul className="list-group">
           {foodItems &&
             foodItems.map((foodItem, index) => (
-              foodItem.daysToExp <= expDateRange ?
+              calcDate(foodItem.expDate) <= expDateRange ?
                 <li
                   className="list-group-item d-flex justify-content-between"
                   key={index}
@@ -139,7 +148,7 @@ const MyFoodList = () => {
                   <div>
                     <p className={"mb-0 " + styles.foodName}>{foodItem.name}</p>
                     <div>
-                      <p className="mb-0 text-muted">{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
+                      <p className="mb-0 text-muted">{foodItem.type} | Days to Exp: {calcDate(foodItem.expDate)}</p>
                     </div>
                   </div>
                   <div className="d-flex">
@@ -209,7 +218,7 @@ const MyFoodList = () => {
                     <div>
                       <p className={"mb-0 " + styles.foodName}>{foodItem.name}</p>
                       <div>
-                        <p className="mb-0 text-muted">{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
+                        <p className="mb-0 text-muted">{foodItem.type} | Days to Exp: {calcDate(foodItem.expDate)}</p>
                       </div>
                     </div>
                     <div className="d-flex">

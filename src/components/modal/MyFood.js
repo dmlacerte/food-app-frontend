@@ -86,14 +86,14 @@ const MyFood = ({ id, closeModal }) => {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="daysToExp" className="mt-2">Days to Expiration:</label>
+          <label htmlFor="ExpDate" className="mt-2">Expiration Date:</label>
           <input
-            type="number"
+            type="date"
             step="1"
             className="form-control"
-            id="daysToExp"
-            name="daysToExp"
-            value={currentFood.daysToExp}
+            id="expDate"
+            name="expDate"
+            value={currentFood.expDate}
             onChange={handleInputChange}
           />
         </div>

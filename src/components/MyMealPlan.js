@@ -123,6 +123,15 @@ const MyMealPlan = () => {
         setCheckedPantryIDs([]);
     };
 
+    const calcDate = (expDateStr) => {
+        const expDate = new Date(expDateStr);
+        const expDateTime = expDate.getTime();
+        
+        const today = new Date();
+    
+        return (Math.floor((expDateTime-today)/(24*3600*1000)) + 1);
+    };
+
     useEffect(() => {
         retrieveFoodItems();
         retrieveGroceryItems();
@@ -210,7 +219,7 @@ const MyMealPlan = () => {
                                     <div>
                                         <p className={"mb-0 " + styles.foodName}>{foodItem.name}</p>
                                         <div>
-                                            <p className="mb-0 text-muted">{foodItem.type} | Days to Exp: {foodItem.daysToExp}</p>
+                                            <p className="mb-0 text-muted">{foodItem.type} | Days to Exp: {calcDate(foodItem.expDate)}</p>
                                         </div>
                                     </div>
                                 </li>
