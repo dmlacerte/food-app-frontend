@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
-import FoodManagerDataService from "../services/FoodManagerDataService";
+import GroceryManagerDataService from "../../services/GroceryManagerDataService";
 
-const MyFood = ({ id, closeModal }) => {
-  let navigate = useNavigate();
+const MyGrocery = ({ id, closeModal }) => {
 
-  const initialFoodState = {
+  const initialGroceryState = {
     id: null,
     name: "",
     type: ""
   };
 
-  const [currentFood, setCurrentFood] = useState(initialFoodState);
+  const [currentGrocery, setCurrentGrocery] = useState(initialGroceryState);
   const typeOptions = ["Vegetable", "Fruit", "Meat", "Dairy", "Frozen", "Packaged", "Misc"];
 
-  const getFood = foodID => {
-    FoodManagerDataService.get(foodID)
+  const getGrocery = groceryID => {
+    GroceryManagerDataService.get(groceryID)
       .then(response => {
-        setCurrentFood(response.data);
+        setCurrentGrocery(response.data);
         console.log(response.data);
       })
       .catch(e => {
@@ -27,16 +25,16 @@ const MyFood = ({ id, closeModal }) => {
 
   useEffect(() => {
     if (id)
-      getFood(id);
+      getGrocery(id);
   }, [id]);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
-    setCurrentFood({ ...currentFood, [name]: value });
+    setCurrentGrocery({ ...currentGrocery, [name]: value });
   };
 
-  const updateFood = () => {
-    FoodManagerDataService.update(currentFood.id, currentFood)
+  const updateGrocery = () => {
+    GroceryManagerDataService.update(currentGrocery.id, currentGrocery)
       .then(response => {
         console.log(response.data);
         closeModal();
@@ -46,11 +44,10 @@ const MyFood = ({ id, closeModal }) => {
       });
   };
 
-  const deleteFood = () => {
-    FoodManagerDataService.remove(currentFood.id)
+  const deleteGrocery = () => {
+    GroceryManagerDataService.remove(currentGrocery.id)
       .then(response => {
         console.log(response.data);
-        navigate("/myfood");
         closeModal();
       })
       .catch(e => {
@@ -60,7 +57,7 @@ const MyFood = ({ id, closeModal }) => {
 
   return (
     <div className="edit-form">
-      <h4 className="text-center">Edit Food Item</h4>
+      <h4 className="text-center">Edit Grocery Item</h4>
       <form>
         <div className="form-group">
           <label htmlFor="name">Name:</label>
@@ -69,7 +66,7 @@ const MyFood = ({ id, closeModal }) => {
             className="form-control"
             id="name"
             name="name"
-            value={currentFood.name}
+            value={currentGrocery.name}
             onChange={handleInputChange}
           />
         </div>
@@ -80,7 +77,7 @@ const MyFood = ({ id, closeModal }) => {
               return (
                 <option
                   value={option}
-                  selected={currentFood.type === option ? true : false}
+                  selected={currentGrocery.type === option ? true : false}
                 >
                   {option}
                 </option>
@@ -88,24 +85,12 @@ const MyFood = ({ id, closeModal }) => {
             })}
           </select>
         </div>
-        <div className="form-group">
-          <label htmlFor="daysToExp" className="mt-2">Days to Expiration:</label>
-          <input
-            type="number"
-            step="1"
-            className="form-control"
-            id="daysToExp"
-            name="daysToExp"
-            value={currentFood.daysToExp}
-            onChange={handleInputChange}
-          />
-        </div>
       </form>
       <div className="text-center mt-3">
-        <button type="submit" className="btn btn-secondary" onClick={updateFood}>
+        <button type="submit" className="btn btn-secondary" onClick={updateGrocery}>
           Update
         </button>
-        <button className="btn btn-danger ms-2" onClick={deleteFood}>
+        <button className="btn btn-danger ms-2" onClick={deleteGrocery}>
           Delete
         </button>
       </div>
@@ -113,4 +98,4 @@ const MyFood = ({ id, closeModal }) => {
   );
 };
 
-export default MyFood;
+export default MyGrocery;

@@ -1,0 +1,9 @@
+.pantryButtons {
+    font-size: 12px;
+    text-decoration: underline;
+    color: gray;
+}
+
+.pantryButtons:hover {
+    cursor: pointer;
+}

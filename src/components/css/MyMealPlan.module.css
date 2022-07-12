@@ -1,0 +1,20 @@
+.sectionHeader {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+}
+
+.pantryButtons {
+    font-size: 12px;
+    text-decoration: underline;
+    color: gray;
+}
+
+.pantryButtons:hover {
+    cursor: pointer;
+}
+
+.title {
+    /* width: 100%; */
+    margin: 2px;
+    border-bottom-style: solid;
+}

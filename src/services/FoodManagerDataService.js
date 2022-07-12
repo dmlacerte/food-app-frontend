@@ -16,6 +16,10 @@ const update = (id, data) => {
     return http.put(`/myfood/${id}`, data);
 };
 
+const updateUseThisWeek = (id, newValue) => {
+    return http.patch(`/myfood/${id}/${newValue}`);
+};
+
 const remove = id => {
     return http.delete(`/myfood/${id}`);
 };
@@ -35,7 +39,8 @@ const FoodManagerDataService = {
     update,
     remove,
     removeAll,
-    findByName
+    findByName,
+    updateUseThisWeek
 };
 
 export default FoodManagerDataService;
