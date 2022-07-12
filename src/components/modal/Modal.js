@@ -3,8 +3,30 @@ import FocusTrap from 'focus-trap-react';
 import ReactDOM from 'react-dom';
 import AddFood from './AddFood';
 import MyFood from './MyFood';
+import MyGrocery from './MyGrocery';
+import AddGrocery from './AddGrocery';
+import AddWeeklyFood from './AddWeeklyFood';
+import AddMealPlan from './AddMealPlan';
 
-const Modal = ({ closeModal, triggerText, id }) => {
+const Modal = ({ closeModal, triggerText, id, day, time }) => {
+
+    let determineModal = null;
+    
+    if (triggerText === 'Add' || triggerText === 'Add to Pantry') {
+        determineModal = <AddFood id={id}/>;
+    } else if (triggerText === 'Update') {
+        determineModal = <MyFood id={id} closeModal={closeModal} />;
+    } else if (triggerText === 'Edit') {
+        determineModal = <MyGrocery id={id} closeModal={closeModal} />;
+    } else if (triggerText === 'Add Grocery') {
+        determineModal = <AddGrocery />;
+    } else if (triggerText === 'Add Pantry') {
+        determineModal = <AddWeeklyFood />;
+    } else if (triggerText === '') {
+        determineModal = <AddMealPlan day={day} time={time}/>;
+    }
+
+
     return ReactDOM.createPortal(
         <FocusTrap>
             <aside
@@ -13,12 +35,9 @@ const Modal = ({ closeModal, triggerText, id }) => {
                 tabIndex="-1"
                 aria-modal="true"
                 className="modal-cover"
-                // onClick={onClickOutside}
-                // onKeyDown={onKeyDown}
             >
-                <div className="modal-area" /* ref={modalRef} */>
+                <div className="modal-area">
                     <button
-                        // ref={buttonRef}
                         aria-label="Close Modal"
                         aria-labelledby="close-modal"
                         className="_modal-close"
@@ -32,7 +51,7 @@ const Modal = ({ closeModal, triggerText, id }) => {
                         </svg>
                     </button>
                     <div className="modal-body">
-                        { triggerText === 'Add' ? <AddFood /> : <MyFood id={id} closeModal={closeModal}/>}
+                        {determineModal}
                     </div>
                 </div>
             </aside>
