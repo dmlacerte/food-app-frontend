@@ -31,7 +31,8 @@
 }
 
 .tableRows {
-    line-height: 100px;
+    height: 100px;
+    vertical-align: middle;
 }
 
 /* Mobile Accessibility */
