@@ -14,9 +14,24 @@
 }
 
 .title {
-    /* width: 100%; */
     margin: 2px;
     border-bottom-style: solid;
+}
+
+.weeklyFoodContainer {
+    width: 25%;
+}
+
+.weeklyPlanContainer {
+    width: 74%;
+}
+
+.table {
+    table-layout: fixed;
+}
+
+.tableRows {
+    line-height: 100px;
 }
 
 /* Mobile Accessibility */

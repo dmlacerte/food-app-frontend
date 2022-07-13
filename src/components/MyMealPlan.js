@@ -152,8 +152,8 @@ const MyMealPlan = () => {
     }, []);
 
     return (
-        <div className="row">
-            <div className="col-md-3 me-4">
+        <div className="row d-flex">
+            <div className={"me-2 " + styles.weeklyFoodContainer}>
                 <h3 className={styles.sectionHeader}>Food To Use This Week</h3>
                 <div className="d-flex justify-content-center">
                     <Container
@@ -246,41 +246,23 @@ const MyMealPlan = () => {
                     </div>
                 </div>
             </div>
-            <div className="col-md-8 ms-4">
+            <div className={styles.weeklyPlanContainer}>
                 <h3 className={styles.sectionHeader}>Weekly Meal Planner</h3>
-                {/* <div className="row d-flex">
-                    <div className="col me-2">
-                        <p></p>
-                        <p className={"row align-self-center " + styles.title}>Breakfast</p>
-                        <p className={"row align-self-center " + styles.title}>Lunch</p>
-                        <p className={"row align-self-center " + styles.title}>Dinner</p>
-                        <p className={"row align-self-center " + styles.title}>Snacks</p>
-                    </div>
-                    {potentialDates.map(day => (
-                        <div className="col pe-2 text-center">
-                            <p className={"row align-self-center " + styles.title}>{day}</p>
-                            <MealPlanSpaces className={"row align-self-center " + styles.title} id={day} time="Breakfast" />
-                            <MealPlanSpaces className={"row align-self-center " + styles.title} id={day} time="Lunch" />
-                            <MealPlanSpaces className={"row align-self-center " + styles.title} id={day} time="Dinner" />
-                            <MealPlanSpaces className={"row align-self-center " + styles.title} id={day} time="Snacks" />
-                        </div>
-                    ))}
-                </div> */}
-                <div className="row d-flex">
-                    <table class="table">
+                <div className="d-flex">
+                    <table className={"table " + styles.table}>
                         <thead>
                             <tr>
                                 <th scope="col"></th>
                                 {potentialDates.map(date => (
-                                    <th scope="col">{date}</th>
+                                    <th className="text-center" scope="col">{date}</th>
                                 ))}
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr className={styles.tableRows}>
                                 <th scope="row">Breakfast</th>
                                 {potentialDates.map(date => {
-                                    let dailyPlan = mealPlanItems.filter(item => item.day === date)
+                                    let dailyPlan = mealPlanItems.filter(item => item.day === date && item.time === "Breakfast")
                                     return (<Container
                                         triggerText={dailyPlan.length > 0 ? dailyPlan[0].description : ""}
                                         category="Meal Plan"
@@ -290,23 +272,44 @@ const MyMealPlan = () => {
                                     />)
                                 })}
                             </tr>
-                            <tr>
+                            <tr className={styles.tableRows}>
                                 <th scope="row">Lunch</th>
-                                {potentialDates.map(date => (
-                                    <MealPlanSpace day={date} time="Lunch" />
-                                ))}
+                                {potentialDates.map(date => {
+                                    let dailyPlan = mealPlanItems.filter(item => item.day === date && item.time === "Lunch")
+                                    return (<Container
+                                        triggerText={dailyPlan.length > 0 ? dailyPlan[0].description : ""}
+                                        category="Meal Plan"
+                                        day={date}
+                                        time="Lunch"
+                                        retrieveItems={retrieveMealPlanItems}
+                                    />)
+                                })}
                             </tr>
-                            <tr>
+                            <tr className={styles.tableRows}>
                                 <th scope="row">Dinner</th>
-                                {potentialDates.map(date => (
-                                    <MealPlanSpace day={date} time="Dinner" />
-                                ))}
+                                {potentialDates.map(date => {
+                                    let dailyPlan = mealPlanItems.filter(item => item.day === date && item.time === "Dinner")
+                                    return (<Container
+                                        triggerText={dailyPlan.length > 0 ? dailyPlan[0].description : ""}
+                                        category="Meal Plan"
+                                        day={date}
+                                        time="Dinner"
+                                        retrieveItems={retrieveMealPlanItems}
+                                    />)
+                                })}
                             </tr>
-                            <tr>
+                            <tr className={styles.tableRows}>
                                 <th scope="row">Snacks</th>
-                                {potentialDates.map(date => (
-                                    <MealPlanSpace day={date} time="Snacks" />
-                                ))}
+                                {potentialDates.map(date => {
+                                    let dailyPlan = mealPlanItems.filter(item => item.day === date && item.time === "Snacks")
+                                    return (<Container
+                                        triggerText={dailyPlan.length > 0 ? dailyPlan[0].description : ""}
+                                        category="Meal Plan"
+                                        day={date}
+                                        time="Snacks"
+                                        retrieveItems={retrieveMealPlanItems}
+                                    />)
+                                })}
                             </tr>
                         </tbody>
                     </table>

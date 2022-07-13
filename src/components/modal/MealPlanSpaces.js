@@ -5,7 +5,7 @@ const MealPlanSpaces = ({ showModal, triggerText }) => {
 
     return (
         <>
-            <td className={"me-2 " + styles.foodPlanButtons} onClick={showModal}>
+            <td className={"me-2 text-center " + styles.foodPlanButtons} onClick={showModal}>
                 {triggerText}
             </td>
         </>

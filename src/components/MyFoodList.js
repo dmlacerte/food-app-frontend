@@ -112,7 +112,7 @@ const MyFoodList = () => {
 
   return (
     <div className="row d-flex">
-      <div className={/* "col-md-4 "+*/ styles.expFoodContainer}>
+      <div className={styles.expFoodContainer}>
         <h4 className={styles.sectionHeader}>Use It or Lose It</h4>
         <div className="text-center">Food expiring within the next
           <div className={styles.expRangeForm}>
