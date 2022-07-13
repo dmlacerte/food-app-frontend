@@ -7,7 +7,7 @@ const AddFood = ({ id }) => {
     id: null,
     name: "",
     type: "Misc",
-    expDate: "yyyy-mm-dd",
+    expDate: "",
     useThisWeek: false
   };
 
