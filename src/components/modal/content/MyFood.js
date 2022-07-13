@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
-import GroceryManagerDataService from "../../services/GroceryManagerDataService";
+import FoodManagerDataService from "../../../services/FoodManagerDataService";
 
-const MyGrocery = ({ id, closeModal }) => {
+const MyFood = ({ id, closeModal }) => {
 
-  const initialGroceryState = {
+  const initialFoodState = {
     id: null,
     name: "",
     type: ""
   };
 
-  const [currentGrocery, setCurrentGrocery] = useState(initialGroceryState);
+  const [currentFood, setCurrentFood] = useState(initialFoodState);
   const typeOptions = ["Vegetable", "Fruit", "Meat", "Dairy", "Frozen", "Packaged", "Misc"];
 
-  const getGrocery = groceryID => {
-    GroceryManagerDataService.get(groceryID)
+  const getFood = foodID => {
+    FoodManagerDataService.get(foodID)
       .then(response => {
-        setCurrentGrocery(response.data);
+        setCurrentFood(response.data);
         console.log(response.data);
       })
       .catch(e => {
@@ -25,16 +25,16 @@ const MyGrocery = ({ id, closeModal }) => {
 
   useEffect(() => {
     if (id)
-      getGrocery(id);
+      getFood(id);
   }, [id]);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
-    setCurrentGrocery({ ...currentGrocery, [name]: value });
+    setCurrentFood({ ...currentFood, [name]: value });
   };
 
-  const updateGrocery = () => {
-    GroceryManagerDataService.update(currentGrocery.id, currentGrocery)
+  const updateFood = () => {
+    FoodManagerDataService.update(currentFood.id, currentFood)
       .then(response => {
         console.log(response.data);
         closeModal();
@@ -44,8 +44,8 @@ const MyGrocery = ({ id, closeModal }) => {
       });
   };
 
-  const deleteGrocery = () => {
-    GroceryManagerDataService.remove(currentGrocery.id)
+  const deleteFood = () => {
+    FoodManagerDataService.remove(currentFood.id)
       .then(response => {
         console.log(response.data);
         closeModal();
@@ -57,7 +57,7 @@ const MyGrocery = ({ id, closeModal }) => {
 
   return (
     <div className="edit-form">
-      <h4 className="text-center">Edit Grocery Item</h4>
+      <h4 className="text-center">Edit Food Item</h4>
       <form>
         <div className="form-group">
           <label htmlFor="name">Name:</label>
@@ -66,7 +66,7 @@ const MyGrocery = ({ id, closeModal }) => {
             className="form-control"
             id="name"
             name="name"
-            value={currentGrocery.name}
+            value={currentFood.name}
             onChange={handleInputChange}
           />
         </div>
@@ -77,7 +77,7 @@ const MyGrocery = ({ id, closeModal }) => {
               return (
                 <option
                   value={option}
-                  selected={currentGrocery.type === option ? true : false}
+                  selected={currentFood.type === option ? true : false}
                 >
                   {option}
                 </option>
@@ -85,12 +85,24 @@ const MyGrocery = ({ id, closeModal }) => {
             })}
           </select>
         </div>
+        <div className="form-group">
+          <label htmlFor="ExpDate" className="mt-2">Expiration Date:</label>
+          <input
+            type="date"
+            step="1"
+            className="form-control"
+            id="expDate"
+            name="expDate"
+            value={currentFood.expDate}
+            onChange={handleInputChange}
+          />
+        </div>
       </form>
       <div className="text-center mt-3">
-        <button type="submit" className="btn btn-secondary" onClick={updateGrocery}>
+        <button type="submit" className="btn btn-secondary" onClick={updateFood}>
           Update
         </button>
-        <button className="btn btn-danger ms-2" onClick={deleteGrocery}>
+        <button className="btn btn-danger ms-2" onClick={deleteFood}>
           Delete
         </button>
       </div>
@@ -98,4 +110,4 @@ const MyGrocery = ({ id, closeModal }) => {
   );
 };
 
-export default MyGrocery;
+export default MyFood;

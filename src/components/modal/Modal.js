@@ -1,13 +1,13 @@
 import React from 'react';
 import FocusTrap from 'focus-trap-react';
 import ReactDOM from 'react-dom';
-import AddFood from './AddFood';
-import MyFood from './MyFood';
-import MyGrocery from './MyGrocery';
-import AddGrocery from './AddGrocery';
-import AddWeeklyFood from './AddWeeklyFood';
-import AddMealPlan from './AddMealPlan';
-import MyPlan from './MyPlan';
+import AddFood from './content/AddFood';
+import MyFood from './content/MyFood';
+import MyGrocery from './content/MyGrocery';
+import AddGrocery from './content/AddGrocery';
+import AddWeeklyFood from './content/AddWeeklyFood';
+import AddMealPlan from './content/AddMealPlan';
+import MyPlan from './content/MyPlan';
 
 const Modal = ({ closeModal, triggerText, id, day, time, category }) => {
 

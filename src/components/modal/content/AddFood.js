@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import FoodManagerDataService from "../../services/FoodManagerDataService";
-import GroceryManagerDataService from "../../services/GroceryManagerDataService";
+import FoodManagerDataService from "../../../services/FoodManagerDataService";
+import GroceryManagerDataService from "../../../services/GroceryManagerDataService";
 
 const AddFood = ({ id }) => {
   const initialFoodState = {

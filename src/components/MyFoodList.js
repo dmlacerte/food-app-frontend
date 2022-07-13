@@ -113,7 +113,7 @@ const MyFoodList = () => {
   return (
     <div className="row d-flex">
       <div className={styles.expFoodContainer}>
-        <h4 className={styles.sectionHeader}>Use It or Lose It</h4>
+        <h3 className={styles.sectionHeader}>Use It or Lose It</h3>
         <div className="text-center">Food expiring within the next
           <div className={styles.expRangeForm}>
           <form>
@@ -164,7 +164,7 @@ const MyFoodList = () => {
         </ul>
       </div>
       <div className={"col-md-8 " + styles.pantryContainer}>
-        <h4 className={styles.sectionHeader}>My Pantry</h4>
+        <h3 className={styles.sectionHeader}>My Pantry</h3>
         <div className={styles.typeContainer}>
           {typeOptions.map((type, index) => {
             return (
@@ -176,7 +176,7 @@ const MyFoodList = () => {
           <p className={styles.resetTypeButton} onClick={resetType}>Reset</p>
         </div>
         <div className={"mb-3 " + styles.pantryOptions}>
-          <div className={/*"col-md-6 " +*/styles.searchBar}>
+          <div className={styles.searchBar}>
             <div className="input-group">
               <input
                 type="text"

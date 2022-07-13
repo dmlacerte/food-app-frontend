@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Modal from './Modal.js';
-import TriggerButton from './TriggerButton.js';
-import TriggerText from './TriggerText.js';
-import MealPlanSpace from './MealPlanSpaces.js';
+import TriggerButton from './buttons/TriggerButton.js';
+import TriggerText from './buttons/TriggerText.js';
+import MealPlanSpace from './buttons/MealPlanSpaces.js';
 
 const Container = ({ triggerText, id, retrieveItems, day, time, category }) => {
     const [isShown, setIsShown] = useState(false);

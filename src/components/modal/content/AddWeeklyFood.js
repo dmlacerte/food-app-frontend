@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import FoodManagerDataService from "../../services/FoodManagerDataService";
+import FoodManagerDataService from "../../../services/FoodManagerDataService";
 
 const AddWeeklyFood = () => {
     

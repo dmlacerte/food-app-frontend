@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -6,8 +6,7 @@ import "./App.css";
 import MyFoodList from "./components/MyFoodList";
 import MyMealPlan from "./components/MyMealPlan";
 
-class App extends Component {
-  render() {
+const App = () => {
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-success ps-2">
@@ -36,7 +35,6 @@ class App extends Component {
         </div>
       </div>
     );
-  }
 }
 
 export default App;

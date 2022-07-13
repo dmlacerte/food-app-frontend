@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../css/TriggerText.module.css';
+import styles from '../../css/TriggerText.module.css';
 
 const MealPlanSpaces = ({ showModal, triggerText }) => {
 

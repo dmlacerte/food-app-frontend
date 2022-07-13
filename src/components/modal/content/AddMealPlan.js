@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MealPlanDataService from "../../services/MealPlanDataService";
+import MealPlanDataService from "../../../services/MealPlanDataService";
 
 const AddMealPlan = ({ day, time, closeModal }) => {
 
