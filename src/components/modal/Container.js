@@ -4,7 +4,7 @@ import TriggerButton from './TriggerButton.js';
 import TriggerText from './TriggerText.js';
 import MealPlanSpace from './MealPlanSpaces.js';
 
-const Container = ({ triggerText, id, retrieveItems, day, time }) => {
+const Container = ({ triggerText, id, retrieveItems, day, time, category }) => {
     const [isShown, setIsShown] = useState(false);
     const foodId = id ? id : null;
 
@@ -33,22 +33,20 @@ const Container = ({ triggerText, id, retrieveItems, day, time }) => {
                 ) : null}
             </>
         )
-    } else if (triggerText === '') {
+    } else if (category === 'Meal Plan') {
         return (
             <>
                 <MealPlanSpace
                     triggerText={triggerText}
                     showModal={showModal}
-                    day={day}
-                    time={time}
                 />
                 {isShown ? (
                     <Modal
                         closeModal={closeModal}
-                        id={foodId}
                         triggerText={triggerText}
                         day={day}
                         time={time}
+                        category={category}
                     />
                 ) : null}
             </>
@@ -70,29 +68,6 @@ const Container = ({ triggerText, id, retrieveItems, day, time }) => {
             </>
         )
     }
-
-    // return (
-    //     // <>
-    //     //     {/* { triggerText === 'Add to Pantry' 
-    //     //     ? <TriggerText 
-    //     //         triggerText={triggerText}
-    //     //         showModal={showModal}
-    //     //     />
-    //     //     : <TriggerButton 
-    //     //         triggerText={triggerText}
-    //     //         showModal={showModal}
-    //     //     />
-    //     //     } */}
-    //     //     {trigger}
-    //     //     {isShown ? (
-    //     //         <Modal
-    //     //             closeModal={closeModal}
-    //     //             id={foodId}
-    //     //             triggerText={triggerText}
-    //     //         />
-    //     //     ) : null}
-    //     // </>
-    // )
 }
 
 export default Container;

@@ -7,8 +7,9 @@ import MyGrocery from './MyGrocery';
 import AddGrocery from './AddGrocery';
 import AddWeeklyFood from './AddWeeklyFood';
 import AddMealPlan from './AddMealPlan';
+import MyPlan from './MyPlan';
 
-const Modal = ({ closeModal, triggerText, id, day, time }) => {
+const Modal = ({ closeModal, triggerText, id, day, time, category }) => {
 
     let determineModal = null;
     
@@ -22,8 +23,10 @@ const Modal = ({ closeModal, triggerText, id, day, time }) => {
         determineModal = <AddGrocery />;
     } else if (triggerText === 'Add Pantry') {
         determineModal = <AddWeeklyFood />;
-    } else if (triggerText === '') {
-        determineModal = <AddMealPlan day={day} time={time}/>;
+    } else if (category === 'Meal Plan' && triggerText === "") {
+        determineModal = <AddMealPlan day={day} time={time} closeModal={closeModal}/>;
+    } else if (category === 'Meal Plan' && triggerText !== "") {
+        determineModal = <MyPlan day={day} time={time} closeModal={closeModal}/>;
     }
 
 

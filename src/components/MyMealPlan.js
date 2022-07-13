@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import styles from "./css/MyMealPlan.module.css";
 import FoodManagerDataService from "../services/FoodManagerDataService";
 import GroceryManagerDataService from "../services/GroceryManagerDataService";
+import MealPlanDataService from "../services/MealPlanDataService";
 import Container from "./modal/Container";
 import MealPlanSpace from "./modal/MealPlanSpaces";
 
 const MyMealPlan = () => {
     const [foodItems, setFoodItems] = useState([]);
     const [groceryItems, setGroceryItems] = useState([]);
+    const [mealPlanItems, setMealPlanItems] = useState([]);
     const [checkedPantryIDs, setCheckedPantryIDs] = useState([]);
     const [checkedGroceryIDs, setCheckedGroceryIDs] = useState([]);
     const potentialDates = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -32,6 +34,17 @@ const MyMealPlan = () => {
                 let newFoodItems = response.data;
                 if (newFoodItems.length > 0) newFoodItems.sort(compareItems);
                 setFoodItems(newFoodItems);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    };
+
+    const retrieveMealPlanItems = () => {
+        MealPlanDataService.getAll()
+            .then(response => {
+                let newMealPlanItems = response.data;
+                setMealPlanItems(newMealPlanItems);
             })
             .catch(e => {
                 console.log(e);
@@ -135,6 +148,7 @@ const MyMealPlan = () => {
     useEffect(() => {
         retrieveFoodItems();
         retrieveGroceryItems();
+        retrieveMealPlanItems();
     }, []);
 
     return (
@@ -265,14 +279,16 @@ const MyMealPlan = () => {
                         <tbody>
                             <tr>
                                 <th scope="row">Breakfast</th>
-                                {potentialDates.map(date => (
-                                    // <MealPlanSpace day={date} time="Breakfast" />
-                                    <Container
-                                        triggerText=""
+                                {potentialDates.map(date => {
+                                    let dailyPlan = mealPlanItems.filter(item => item.day === date)
+                                    return (<Container
+                                        triggerText={dailyPlan.length > 0 ? dailyPlan[0].description : ""}
+                                        category="Meal Plan"
                                         day={date}
                                         time="Breakfast"
-                                    />
-                                ))}
+                                        retrieveItems={retrieveMealPlanItems}
+                                    />)
+                                })}
                             </tr>
                             <tr>
                                 <th scope="row">Lunch</th>

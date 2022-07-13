@@ -1,32 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import MealPlanDataService from '../../services/MealPlanDataService';
+import React from 'react';
+import styles from '../css/TriggerText.module.css';
 
-const MealPlanSpaces = ({ day, time, showModal }) => {
-
-    const [selectedMealPlan, setSelectedMealPlan] = useState(null);
-
-    const retrieveMealPlan = () => {
-        MealPlanDataService.get(day, time)
-            .then(response => {
-                response ? setSelectedMealPlan(response.data) : setSelectedMealPlan(null);
-                console.log(response.data);
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    };
-
-    useEffect(() => {
-        retrieveMealPlan();
-    }, []);
+const MealPlanSpaces = ({ showModal, triggerText }) => {
 
     return (
-        <td onClick={() => {
-            retrieveMealPlan();
-            showModal();
-        }}>
-            {selectedMealPlan ? selectedMealPlan.description : null}
-        </td>
+        <>
+            <td className={"me-2 " + styles.foodPlanButtons} onClick={showModal}>
+                {triggerText}
+            </td>
+        </>
     )
 }
 
