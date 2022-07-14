@@ -73,11 +73,12 @@ const MyFood = ({ id, closeModal }) => {
                 <div className="form-group">
                     <label htmlFor="type" className="mt-2">Type:</label>
                     <select className="form-control" id="type" name="type" required onChange={handleInputChange}>
-                        {typeOptions.map(option => {
+                        {typeOptions.map((option, index) => {
                             return (
                                 <option
                                     value={option}
                                     selected={currentFood.type === option ? true : false}
+                                    key={index}
                                 >
                                     {option}
                                 </option>

@@ -82,9 +82,9 @@ const AddWeeklyFood = () => {
                     <div className="form-group">
                         <label htmlFor="name" className="mt-2">Name:</label>
                         <select className="form-control" id="name" name="name" required onChange={handleInputChange}>
-                            {foodOptions.map(option => {
+                            {foodOptions.map((option, index) => {
                                 return (
-                                    <option value={option.name}>
+                                    <option value={option.name} key={index}>
                                         {option.name}
                                     </option>
                                 )
