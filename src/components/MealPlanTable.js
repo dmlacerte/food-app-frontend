@@ -19,7 +19,7 @@ const MealPlanTable = ({ mealPlanItems, potentialDates, retrieveMealPlanItems })
                     {potentialDates.map(date => {
                         let dailyPlan = mealPlanItems ? mealPlanItems.filter(item => item.day === date && item.time === "Breakfast") : null
                         return (<Container
-                            triggerText={dailyPlan && dailyPlan.length > 0 ? dailyPlan[0].description : ""}
+                            triggerText={dailyPlan && dailyPlan.length > 0 ? dailyPlan[0].description : null}
                             category="Meal Plan"
                             day={date}
                             time="Breakfast"
@@ -32,7 +32,7 @@ const MealPlanTable = ({ mealPlanItems, potentialDates, retrieveMealPlanItems })
                     {potentialDates.map(date => {
                         let dailyPlan = mealPlanItems ? mealPlanItems.filter(item => item.day === date && item.time === "Lunch") : null
                         return (<Container
-                            triggerText={dailyPlan && dailyPlan.length > 0 ? dailyPlan[0].description : ""}
+                            triggerText={dailyPlan && dailyPlan.length > 0 ? dailyPlan[0].description : null}
                             category="Meal Plan"
                             day={date}
                             time="Lunch"
@@ -45,7 +45,7 @@ const MealPlanTable = ({ mealPlanItems, potentialDates, retrieveMealPlanItems })
                     {potentialDates.map(date => {
                         let dailyPlan = mealPlanItems ? mealPlanItems.filter(item => item.day === date && item.time === "Dinner") : null
                         return (<Container
-                            triggerText={dailyPlan && dailyPlan.length > 0 ? dailyPlan[0].description : ""}
+                            triggerText={dailyPlan && dailyPlan.length > 0 ? dailyPlan[0].description : null}
                             category="Meal Plan"
                             day={date}
                             time="Dinner"
@@ -58,7 +58,7 @@ const MealPlanTable = ({ mealPlanItems, potentialDates, retrieveMealPlanItems })
                     {potentialDates.map(date => {
                         let dailyPlan = mealPlanItems ? mealPlanItems.filter(item => item.day === date && item.time === "Snacks") : null
                         return (<Container
-                            triggerText={dailyPlan && dailyPlan.length > 0 ? dailyPlan[0].description : ""}
+                            triggerText={dailyPlan && dailyPlan.length > 0 ? dailyPlan[0].description : null}
                             category="Meal Plan"
                             day={date}
                             time="Snacks"

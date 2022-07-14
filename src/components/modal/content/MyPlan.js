@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MealPlanDataService from "../../../services/MealPlanDataService";
+import styles from '../../css/Modals.module.css';
 
 const MyPlan = ({ day, time, closeModal }) => {
 
@@ -75,10 +76,10 @@ const MyPlan = ({ day, time, closeModal }) => {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="description">Description:</label>
-                    <input
+                    <label htmlFor="description" className="mt-2">Description:</label>
+                    <textarea
                         type="text"
-                        className="form-control"
+                        className={"form-control " + styles.descriptionBox}
                         id="description"
                         name="description"
                         value={selectedMealPlan.description}

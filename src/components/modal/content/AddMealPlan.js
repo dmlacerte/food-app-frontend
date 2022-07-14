@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import MealPlanDataService from "../../../services/MealPlanDataService";
+import styles from '../../css/Modals.module.css';
 
 const AddMealPlan = ({ day, time, closeModal }) => {
 
@@ -57,14 +58,14 @@ const AddMealPlan = ({ day, time, closeModal }) => {
                     <select className="form-control" id="time" name="time" required>
                         <option value={time}>
                             {time}
-                        </option>
+                        </option>   
                     </select>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="name">Description:</label>
-                    <input
+                    <label htmlFor="name" className="mt-2">Description:</label>
+                    <textarea
                         type="text"
-                        className="form-control"
+                        className={"form-control " + styles.descriptionBox}
                         id="description"
                         required
                         value={mealPlanToSubmit.description}
@@ -72,7 +73,7 @@ const AddMealPlan = ({ day, time, closeModal }) => {
                         name="description"
                     />
                 </div>
-                <div className="text-center mt-3">
+                <div className="text-center mt-3 ">
                     <button onClick={saveMealPlan} className="btn btn-success">
                         Submit
                     </button>

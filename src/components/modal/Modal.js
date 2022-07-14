@@ -23,11 +23,11 @@ const Modal = ({ closeModal, triggerText, id, day, time, category }) => {
         determineModal = <AddGrocery />;
     } else if (triggerText === 'Add Pantry') {
         determineModal = <AddWeeklyFood />;
-    } else if (category === 'Meal Plan' && triggerText === "") {
-        determineModal = <AddMealPlan day={day} time={time} closeModal={closeModal} />;
-    } else if (category === 'Meal Plan' && triggerText !== "") {
+    } else if (category === 'Meal Plan' && (triggerText || triggerText === "")) {
         determineModal = <MyPlan day={day} time={time} closeModal={closeModal} />;
-    }
+    } else if (category === 'Meal Plan') {
+        determineModal = <AddMealPlan day={day} time={time} closeModal={closeModal} />;
+    } 
 
 
     return ReactDOM.createPortal(
