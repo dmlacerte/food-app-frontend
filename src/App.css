@@ -1,23 +1,17 @@
 .pageBody {
-  margin: 0% 2%;
-}
-
-.list {
-  text-align: left;
-  max-width: 750px;
-  margin: auto;
+    margin: 0% 2%;
 }
 
 .submit-form {
-  max-width: 300px;
-  margin: auto;
+    max-width: 300px;
+    margin: auto;
 }
 
-.edit-form {
-  max-width: 300px;
-  margin: auto;
+.edit-form {    
+    max-width: 300px;
+    margin: auto;
 }
 
 .pageHeader {
-  font-family: 'Oswald', sans-serif;
+    font-family: 'Oswald', sans-serif;
 }

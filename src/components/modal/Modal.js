@@ -1,19 +1,20 @@
 import React from 'react';
 import FocusTrap from 'focus-trap-react';
 import ReactDOM from 'react-dom';
-import AddFood from './AddFood';
-import MyFood from './MyFood';
-import MyGrocery from './MyGrocery';
-import AddGrocery from './AddGrocery';
-import AddWeeklyFood from './AddWeeklyFood';
-import AddMealPlan from './AddMealPlan';
+import AddFood from './content/AddFood';
+import MyFood from './content/MyFood';
+import MyGrocery from './content/MyGrocery';
+import AddGrocery from './content/AddGrocery';
+import AddWeeklyFood from './content/AddWeeklyFood';
+import AddMealPlan from './content/AddMealPlan';
+import MyPlan from './content/MyPlan';
 
-const Modal = ({ closeModal, triggerText, id, day, time }) => {
+const Modal = ({ closeModal, triggerText, id, day, time, category }) => {
 
     let determineModal = null;
-    
+
     if (triggerText === 'Add' || triggerText === 'Add to Pantry') {
-        determineModal = <AddFood id={id}/>;
+        determineModal = <AddFood id={id} />;
     } else if (triggerText === 'Update') {
         determineModal = <MyFood id={id} closeModal={closeModal} />;
     } else if (triggerText === 'Edit') {
@@ -22,9 +23,11 @@ const Modal = ({ closeModal, triggerText, id, day, time }) => {
         determineModal = <AddGrocery />;
     } else if (triggerText === 'Add Pantry') {
         determineModal = <AddWeeklyFood />;
-    } else if (triggerText === '') {
-        determineModal = <AddMealPlan day={day} time={time}/>;
-    }
+    } else if (category === 'Meal Plan' && (triggerText || triggerText === "")) {
+        determineModal = <MyPlan day={day} time={time} closeModal={closeModal} />;
+    } else if (category === 'Meal Plan') {
+        determineModal = <AddMealPlan day={day} time={time} closeModal={closeModal} />;
+    } 
 
 
     return ReactDOM.createPortal(

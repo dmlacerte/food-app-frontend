@@ -2,14 +2,17 @@ import React, { useState, useEffect } from "react";
 import styles from "./css/MyMealPlan.module.css";
 import FoodManagerDataService from "../services/FoodManagerDataService";
 import GroceryManagerDataService from "../services/GroceryManagerDataService";
+import MealPlanDataService from "../services/MealPlanDataService";
 import Container from "./modal/Container";
-import MealPlanSpace from "./modal/MealPlanSpaces";
+import MealPlanTable from "./MealPlanTable";
 
 const MyMealPlan = () => {
     const [foodItems, setFoodItems] = useState([]);
     const [groceryItems, setGroceryItems] = useState([]);
+    const [mealPlanItems, setMealPlanItems] = useState([]);
     const [checkedPantryIDs, setCheckedPantryIDs] = useState([]);
     const [checkedGroceryIDs, setCheckedGroceryIDs] = useState([]);
+    const [selectedDay, setSelectedDay] = useState(["Monday"]);
     const potentialDates = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
     const compareItems = (a, b) => {
@@ -32,6 +35,17 @@ const MyMealPlan = () => {
                 let newFoodItems = response.data;
                 if (newFoodItems.length > 0) newFoodItems.sort(compareItems);
                 setFoodItems(newFoodItems);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    };
+
+    const retrieveMealPlanItems = () => {
+        MealPlanDataService.getAll()
+            .then(response => {
+                let newMealPlanItems = response.data;
+                setMealPlanItems(newMealPlanItems);
             })
             .catch(e => {
                 console.log(e);
@@ -123,25 +137,42 @@ const MyMealPlan = () => {
         setCheckedPantryIDs([]);
     };
 
+    const removeAllMealPlanItems = () => {
+        MealPlanDataService.removeAll()
+            .then(response => {
+                console.log(response.data);
+                retrieveMealPlanItems();
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    };
+
     const calcDate = (expDateStr) => {
         const expDate = new Date(expDateStr);
         const expDateTime = expDate.getTime();
-        
+
         const today = new Date();
-    
-        return (Math.floor((expDateTime-today)/(24*3600*1000)) + 1);
+
+        return (Math.floor((expDateTime - today) / (24 * 3600 * 1000)) + 1);
+    };
+
+    const updateSelectedDay = (ev) => {
+        const newDay = [ev.target.value]
+        setSelectedDay(newDay);
     };
 
     useEffect(() => {
         retrieveFoodItems();
         retrieveGroceryItems();
+        retrieveMealPlanItems();
     }, []);
 
     return (
-        <div className="row">
-            <div className="col-md-3 me-4">
+        <div className="row d-flex">
+            <div className={"me-2  " + styles.weeklyFoodContainer}>
                 <h3 className={styles.sectionHeader}>Food To Use This Week</h3>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center mt-2">
                     <Container
                         triggerText="Add Grocery"
                         retrieveItems={retrieveGroceryItems}
@@ -151,7 +182,7 @@ const MyMealPlan = () => {
                         retrieveItems={retrieveFoodItems}
                     />
                 </div>
-                <div className="row border border-secondary mt-4">
+                <div className="row border border-secondary mt-3">
                     <h4 className={"pt-2 " + styles.sectionHeader}>Grocery</h4>
                     <ul className="list-group p-2">
                         {groceryItems && groceryItems.map((groceryItem, index) => (
@@ -232,68 +263,43 @@ const MyMealPlan = () => {
                     </div>
                 </div>
             </div>
-            <div className="col-md-8 ms-4">
+            <div className={styles.weeklyPlanContainer}>
                 <h3 className={styles.sectionHeader}>Weekly Meal Planner</h3>
-                {/* <div className="row d-flex">
-                    <div className="col me-2">
-                        <p></p>
-                        <p className={"row align-self-center " + styles.title}>Breakfast</p>
-                        <p className={"row align-self-center " + styles.title}>Lunch</p>
-                        <p className={"row align-self-center " + styles.title}>Dinner</p>
-                        <p className={"row align-self-center " + styles.title}>Snacks</p>
-                    </div>
-                    {potentialDates.map(day => (
-                        <div className="col pe-2 text-center">
-                            <p className={"row align-self-center " + styles.title}>{day}</p>
-                            <MealPlanSpaces className={"row align-self-center " + styles.title} id={day} time="Breakfast" />
-                            <MealPlanSpaces className={"row align-self-center " + styles.title} id={day} time="Lunch" />
-                            <MealPlanSpaces className={"row align-self-center " + styles.title} id={day} time="Dinner" />
-                            <MealPlanSpaces className={"row align-self-center " + styles.title} id={day} time="Snacks" />
+                <div className={styles.removeAllPlansContainer}>
+                    <p className={styles.removeAllPlansButton} onClick={removeAllMealPlanItems}>Delete All Meal Plans</p>
+                </div>
+                <div className={"d-flex " + styles.weeklyTableContainer}>
+                    <MealPlanTable
+                        mealPlanItems={mealPlanItems}
+                        potentialDates={potentialDates}
+                        retrieveMealPlanItems={retrieveMealPlanItems}
+                    />
+                </div>
+                <div className={styles.dailyTableContainer}>
+                    <div className="text-center">
+                        <div className={styles.expRangeForm}>
+                            <form>
+                                <select onChange={updateSelectedDay}>
+                                    {potentialDates.map((num, index) => {
+                                        return (
+                                            <option
+                                                value={num}
+                                                key={index}
+                                                selected={num === selectedDay ? true : false}
+                                            >
+                                                {num}
+                                            </option>
+                                        )
+                                    })}
+                                </select>
+                            </form>
                         </div>
-                    ))}
-                </div> */}
-                <div className="row d-flex">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                {potentialDates.map(date => (
-                                    <th scope="col">{date}</th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">Breakfast</th>
-                                {potentialDates.map(date => (
-                                    // <MealPlanSpace day={date} time="Breakfast" />
-                                    <Container
-                                        triggerText=""
-                                        day={date}
-                                        time="Breakfast"
-                                    />
-                                ))}
-                            </tr>
-                            <tr>
-                                <th scope="row">Lunch</th>
-                                {potentialDates.map(date => (
-                                    <MealPlanSpace day={date} time="Lunch" />
-                                ))}
-                            </tr>
-                            <tr>
-                                <th scope="row">Dinner</th>
-                                {potentialDates.map(date => (
-                                    <MealPlanSpace day={date} time="Dinner" />
-                                ))}
-                            </tr>
-                            <tr>
-                                <th scope="row">Snacks</th>
-                                {potentialDates.map(date => (
-                                    <MealPlanSpace day={date} time="Snacks" />
-                                ))}
-                            </tr>
-                        </tbody>
-                    </table>
+                    </div>
+                    <MealPlanTable
+                        mealPlanItems={mealPlanItems}
+                        potentialDates={selectedDay}
+                        retrieveMealPlanItems={retrieveMealPlanItems}
+                    />
                 </div>
             </div>
         </div>

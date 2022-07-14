@@ -1,8 +1,8 @@
 import http from "../http-common";
 
-// const getAll = () => {
-//     return http.get("/mygrocery");
-// };
+const getAll = () => {
+    return http.get("/mymealplan");
+};
 
 const get = (day, time) => {
     return http.get(`/mymealplan/${day}/${time}`);
@@ -20,11 +20,16 @@ const remove = id => {
     return http.delete(`/mymealplan/${id}`);
 };
 
+const removeAll = () => {
+    return http.delete(`/mymealplan`);
+};
+
 const MealPlanDataService = {
-    // getAll,
+    getAll,
     get,
     create,
     update,
+    removeAll,
     remove
 };
 
