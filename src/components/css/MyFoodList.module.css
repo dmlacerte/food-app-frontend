@@ -5,7 +5,8 @@
 
 .typeContainer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .resetTypeContainer {
@@ -55,8 +56,67 @@
 .pantryOptions {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .foodName {
     font-size: 18px;
+}
+
+.expFoodContainer {
+    width: 30%;
+}
+
+.pantryContainer {
+    width: 70%;
+}
+
+.searchBar {
+    width: 40%;
+}
+
+/* Mobile Accessibility */
+@media only screen and (max-width: 600px) {
+    
+    .expFoodContainer {
+        width: 100%;
+    }
+
+    .pantryContainer {
+        width: 100%;
+        margin-top: 10%;
+    }
+
+    .typeOptions {
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        font-size: 14px;
+        padding-top: 29px;
+    }
+
+    .pantryButtons {
+        width: 100%;
+        text-align: center;
+        margin: 5% 0% 2% 0%;
+    }
+
+    .searchBar {
+        width: 100%;
+    }
+
+}
+
+/* Tablet Accessibility */
+@media only screen and (min-width: 600px) and (max-width: 820px)  {
+
+    .expFoodContainer {
+        width: 100%;
+    }
+
+    .pantryContainer {
+        width: 100%;
+        margin-top: 10%;
+    }
+
 }

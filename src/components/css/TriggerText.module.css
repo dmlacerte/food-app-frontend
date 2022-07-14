@@ -7,3 +7,14 @@
 .pantryButtons:hover {
     cursor: pointer;
 }
+
+.foodPlanButtons {
+    font-size: 14px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.foodPlanButtons:hover {
+    cursor: pointer;
+    background-color: lightgray;
+}
