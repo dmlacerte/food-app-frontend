@@ -12,9 +12,9 @@ import MyPlan from './content/MyPlan';
 const Modal = ({ closeModal, triggerText, id, day, time, category }) => {
 
     let determineModal = null;
-    
+
     if (triggerText === 'Add' || triggerText === 'Add to Pantry') {
-        determineModal = <AddFood id={id}/>;
+        determineModal = <AddFood id={id} />;
     } else if (triggerText === 'Update') {
         determineModal = <MyFood id={id} closeModal={closeModal} />;
     } else if (triggerText === 'Edit') {
@@ -24,9 +24,9 @@ const Modal = ({ closeModal, triggerText, id, day, time, category }) => {
     } else if (triggerText === 'Add Pantry') {
         determineModal = <AddWeeklyFood />;
     } else if (category === 'Meal Plan' && triggerText === "") {
-        determineModal = <AddMealPlan day={day} time={time} closeModal={closeModal}/>;
+        determineModal = <AddMealPlan day={day} time={time} closeModal={closeModal} />;
     } else if (category === 'Meal Plan' && triggerText !== "") {
-        determineModal = <MyPlan day={day} time={time} closeModal={closeModal}/>;
+        determineModal = <MyPlan day={day} time={time} closeModal={closeModal} />;
     }
 
 

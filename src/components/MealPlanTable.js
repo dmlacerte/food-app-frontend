@@ -17,9 +17,9 @@ const MealPlanTable = ({ mealPlanItems, potentialDates, retrieveMealPlanItems })
                 <tr className={styles.tableRows}>
                     <th scope="row">Breakfast</th>
                     {potentialDates.map(date => {
-                        let dailyPlan = mealPlanItems.filter(item => item.day === date && item.time === "Breakfast")
+                        let dailyPlan = mealPlanItems ? mealPlanItems.filter(item => item.day === date && item.time === "Breakfast") : null
                         return (<Container
-                            triggerText={dailyPlan.length > 0 ? dailyPlan[0].description : ""}
+                            triggerText={dailyPlan && dailyPlan.length > 0 ? dailyPlan[0].description : ""}
                             category="Meal Plan"
                             day={date}
                             time="Breakfast"
@@ -30,9 +30,9 @@ const MealPlanTable = ({ mealPlanItems, potentialDates, retrieveMealPlanItems })
                 <tr className={styles.tableRows}>
                     <th scope="row">Lunch</th>
                     {potentialDates.map(date => {
-                        let dailyPlan = mealPlanItems.filter(item => item.day === date && item.time === "Lunch")
+                        let dailyPlan = mealPlanItems ? mealPlanItems.filter(item => item.day === date && item.time === "Lunch") : null
                         return (<Container
-                            triggerText={dailyPlan.length > 0 ? dailyPlan[0].description : ""}
+                            triggerText={dailyPlan && dailyPlan.length > 0 ? dailyPlan[0].description : ""}
                             category="Meal Plan"
                             day={date}
                             time="Lunch"
@@ -43,9 +43,9 @@ const MealPlanTable = ({ mealPlanItems, potentialDates, retrieveMealPlanItems })
                 <tr className={styles.tableRows}>
                     <th scope="row">Dinner</th>
                     {potentialDates.map(date => {
-                        let dailyPlan = mealPlanItems.filter(item => item.day === date && item.time === "Dinner")
+                        let dailyPlan = mealPlanItems ? mealPlanItems.filter(item => item.day === date && item.time === "Dinner") : null
                         return (<Container
-                            triggerText={dailyPlan.length > 0 ? dailyPlan[0].description : ""}
+                            triggerText={dailyPlan && dailyPlan.length > 0 ? dailyPlan[0].description : ""}
                             category="Meal Plan"
                             day={date}
                             time="Dinner"
@@ -56,9 +56,9 @@ const MealPlanTable = ({ mealPlanItems, potentialDates, retrieveMealPlanItems })
                 <tr className={styles.tableRows}>
                     <th scope="row">Snacks</th>
                     {potentialDates.map(date => {
-                        let dailyPlan = mealPlanItems.filter(item => item.day === date && item.time === "Snacks")
+                        let dailyPlan = mealPlanItems ? mealPlanItems.filter(item => item.day === date && item.time === "Snacks") : null
                         return (<Container
-                            triggerText={dailyPlan.length > 0 ? dailyPlan[0].description : ""}
+                            triggerText={dailyPlan && dailyPlan.length > 0 ? dailyPlan[0].description : ""}
                             category="Meal Plan"
                             day={date}
                             time="Snacks"

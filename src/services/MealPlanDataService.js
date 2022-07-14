@@ -20,11 +20,16 @@ const remove = id => {
     return http.delete(`/mymealplan/${id}`);
 };
 
+const removeAll = () => {
+    return http.delete(`/mymealplan`);
+};
+
 const MealPlanDataService = {
     getAll,
     get,
     create,
     update,
+    removeAll,
     remove
 };
 

@@ -6,7 +6,7 @@ const AddToMealPlanButton = ({ index, value, changeUseThisWeekValue }) => {
         <>
             <button
                 className={value
-                    ? "align-self-center btn btn-success" 
+                    ? "align-self-center btn btn-success"
                     : "align-self-center btn btn-outline-success"}
                 onClick={() => {
                     changeUseThisWeekValue(index);

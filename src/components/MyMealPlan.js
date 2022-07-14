@@ -137,6 +137,17 @@ const MyMealPlan = () => {
         setCheckedPantryIDs([]);
     };
 
+    const removeAllMealPlanItems = () => {
+        MealPlanDataService.removeAll()
+            .then(response => {
+                console.log(response.data);
+                retrieveMealPlanItems();
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    };
+
     const calcDate = (expDateStr) => {
         const expDate = new Date(expDateStr);
         const expDateTime = expDate.getTime();
@@ -159,9 +170,9 @@ const MyMealPlan = () => {
 
     return (
         <div className="row d-flex">
-            <div className={"me-2 " + styles.weeklyFoodContainer}>
+            <div className={"me-2  " + styles.weeklyFoodContainer}>
                 <h3 className={styles.sectionHeader}>Food To Use This Week</h3>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center mt-2">
                     <Container
                         triggerText="Add Grocery"
                         retrieveItems={retrieveGroceryItems}
@@ -171,7 +182,7 @@ const MyMealPlan = () => {
                         retrieveItems={retrieveFoodItems}
                     />
                 </div>
-                <div className="row border border-secondary mt-4">
+                <div className="row border border-secondary mt-3">
                     <h4 className={"pt-2 " + styles.sectionHeader}>Grocery</h4>
                     <ul className="list-group p-2">
                         {groceryItems && groceryItems.map((groceryItem, index) => (
@@ -254,6 +265,9 @@ const MyMealPlan = () => {
             </div>
             <div className={styles.weeklyPlanContainer}>
                 <h3 className={styles.sectionHeader}>Weekly Meal Planner</h3>
+                <div className={styles.removeAllPlansContainer}>
+                    <p className={styles.removeAllPlansButton} onClick={removeAllMealPlanItems}>Delete All Meal Plans</p>
+                </div>
                 <div className={"d-flex " + styles.weeklyTableContainer}>
                     <MealPlanTable
                         mealPlanItems={mealPlanItems}

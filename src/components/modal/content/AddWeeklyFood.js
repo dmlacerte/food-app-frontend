@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import FoodManagerDataService from "../../../services/FoodManagerDataService";
 
 const AddWeeklyFood = () => {
-    
+
     const [food, setFood] = useState("");
     const [foodOptions, setFoodOptions] = useState([]);
     const [submitted, setSubmitted] = useState(false);
@@ -10,14 +10,14 @@ const AddWeeklyFood = () => {
     const compareItems = (a, b) => {
         const itemA = a.name.toUpperCase();
         const itemB = b.name.toUpperCase();
-    
+
         let compare = 0;
         if (itemA > itemB) {
-          compare = 1;
+            compare = 1;
         } else if (itemA < itemB) {
-          compare = -1;
+            compare = -1;
         }
-    
+
         return compare;
     };
 
@@ -66,8 +66,9 @@ const AddWeeklyFood = () => {
     return (
         <div className="submit-form">
             {submitted ? (
-                <div>
+                <div className="text-center">
                     <h4>You submitted successfully!</h4>
+                    <p>Click below to add another item.</p>
                     <div className="text-center mt-3">
                         <button className="btn btn-success" onClick={newFood}>
                             Add Another
@@ -76,7 +77,8 @@ const AddWeeklyFood = () => {
                 </div>
             ) : (
                 <div>
-                    <h4 className="text-center">Add New Food Item</h4>
+                    <h4 className="text-center">Add To Weekly Food List</h4>
+                    <p className="text-center text-secondary mb-0">Add food items from your pantry that you want to use this week.</p>
                     <div className="form-group">
                         <label htmlFor="name" className="mt-2">Name:</label>
                         <select className="form-control" id="name" name="name" required onChange={handleInputChange}>
