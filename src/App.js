@@ -5,6 +5,7 @@ import "./App.css";
 
 import MyFoodList from "./components/MyFoodList";
 import MyMealPlan from "./components/MyMealPlan";
+import MissionPage from './components/MissionPage';
 
 const App = () => {
     return (
@@ -14,6 +15,11 @@ const App = () => {
                     Save Your Food
                 </Link>
                 <div className="navbar-nav ms-auto">
+                <li className="nav-item">
+                        <Link to={"/aboutus"} className="nav-link">
+                            About Us
+                        </Link>
+                    </li>
                     <li className="nav-item">
                         <Link to={"/"} className="nav-link">
                             My Pantry
@@ -30,6 +36,7 @@ const App = () => {
             <div className="mt-3 pageBody">
                 <Routes>
                     <Route path="/" element={<MyFoodList />} />
+                    <Route path="/aboutus" element={<MissionPage />} />
                     <Route path="/mymealplan" element={<MyMealPlan />} />
                 </Routes>
             </div>
