@@ -1,16 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./css/Mission.module.css";
 
 const MissionPage = () => {
+    const [famSize, setFamSize] = useState(4);
+    const famSizeOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const monthlyCost = Math.floor((400 / 12) * famSize);
+    const yearlyCost = Math.floor(400 * famSize);
+    const fiveYearCost = yearlyCost * 5;
+
+    const changeFamSize = (ev) => {
+        setFamSize(ev.target.value);
+    }
+
     return (
         <div className={styles.pageContainer}>
-            <h1 className={styles.pageHeader}>Together We Can Save Your Food</h1>
+            <h1 className={styles.pageHeader}>We Can Save Your Food</h1>
             <p className={styles.subHeader}>Help the planet (and your wallet) using our all in one tool to manage your pantry, grocery list, and meal planning.</p>
 
             <div className={styles.introSectionContainer}>
                 <img src="/rottenFruit.jpeg" alt="a picture of rotten avocados and bananas"></img>
                 <p className={styles.textParagraph}>
-                    <span className={styles.boldText}> Nearly 40% of all of our food ends up in the trash,</span> even though <span className={styles.boldText}>1 in 6 Americans faces food insecurity.</span> While food waste can occur at all stages of the food production and distribution cycle
+                    <span className={styles.boldText}> Nearly 40% of all of our food ends up in the trash,</span> even though <span className={styles.boldText}>1 in 6 Americans face food insecurity.</span> While food waste can occur at all stages of the food production and distribution cycle
                     (unharvested crops, restaurant waste, damage during manufacturing and distribution, not meeting retailer standards for appearance),
                     about <span className={styles.boldText}>39% of food waste happens at home</span> (equivalent to <span className={styles.boldText}>42 billion pounds per year</span>).
                     But we can do something about it - and have a positive impact not just on our wallet, but our planet.
@@ -22,8 +32,40 @@ const MissionPage = () => {
                 <div className={styles.sectionDivider}> </div>
             </div>
             <p>
-                Americans waste almost $218 billion per year on discarded food - an average of <span className={styles.boldText}>$1,600 per year for the average family of four.</span> Use the slider below to see how your costs stack up:
+                Americans waste almost $218 billion per year on discarded food - an average of <span className={styles.boldText}>$1,600 per year for a family of four.</span> Change the family size below to see how your costs stack up:
             </p>
+            <div className={styles.dropdownContainer}>Average cost of food waste for a family of 
+                <form>
+                    <select onChange={changeFamSize}>
+                        {famSizeOptions.map((num, index) => {
+                            return (
+                                <option
+                                    value={num}
+                                    key={index}
+                                    selected={num === famSize ? true : false}
+                                >
+                                    {num}
+                                </option>
+                            )
+                        })}
+                    </select>
+                </form>
+                every:
+            </div>
+            <div className={styles.costContainer}>
+                <div className={styles.costBox}>
+                    <p className={styles.costTitle}>MONTH</p>
+                    <p className={styles.cost}>${monthlyCost}</p>
+                </div>
+                <div className={styles.costBox}>
+                    <p className={styles.costTitle}>1 YEAR</p>
+                    <p className={styles.cost}>${yearlyCost}</p>
+                </div>
+                <div className={styles.costBox}>
+                    <p className={styles.costTitle}>5 YEARS</p>
+                    <p className={styles.cost}>${fiveYearCost}</p>
+                </div>
+            </div>
 
             <div className={styles.sectionHeaderContainer}>
                 <h2 className={styles.sectionHeader}>OUR PLANET</h2>
@@ -71,6 +113,9 @@ const MissionPage = () => {
                         <li className={styles.listItems}>
                             Get notified when food is within 7 days of expiring.
                         </li>
+                        <li className={styles.listItems}>
+                            Mark food you want to prioritize using.
+                        </li>
                     </ul>
                     <p>Meal Planning helps you tackle your weekly food plans:</p>
                     <ul>
@@ -78,7 +123,7 @@ const MissionPage = () => {
                             Create your grocery list - and once you're done shopping, add your items to your pantry with the click of a button.
                         </li>
                         <li className={styles.listItems}>
-                            Keep track of items from your pantry that you want to use this week, and easily delete them from your pantry once used.
+                            Keep track of items from your pantry that you want to prioritize using, and easily delete them from your pantry once used.
                         </li>
                         <li className={styles.listItems}>
                             Create a visual schedule of your weekly meal plan to make sure your pantry items are getting used!
