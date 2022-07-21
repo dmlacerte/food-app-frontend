@@ -4,7 +4,7 @@ import styles from "./css/Mission.module.css";
 const MissionPage = () => {
     return (
         <div className={styles.pageContainer}>
-            <h1 className={styles.pageHeader}>We Can Save Your Food</h1>
+            <h1 className={styles.pageHeader}>Together We Can Save Your Food</h1>
             <p className={styles.subHeader}>Help the planet (and your wallet) using our all in one tool to manage your pantry, grocery list, and meal planning.</p>
 
             <div className={styles.introSectionContainer}>
@@ -36,7 +36,7 @@ const MissionPage = () => {
                     </p>
                     <ul>
                         <li className={styles.listItems}>
-                            Our food requires significant energy and water to produce. Agriculture takes up <span className={styles.boldText}>50% of U.S. land area,</span> and accounts for <span className={styles.boldText}>80% of our freshwater consumption. </span> 
+                            Our food requires significant energy and water to produce. Agriculture takes up <span className={styles.boldText}>50% of U.S. land area,</span> and accounts for <span className={styles.boldText}>80% of our freshwater consumption. </span>
                             In addition, the fuel cost of transporting our food accounts for <span className={styles.boldText}>10% of our total energy budget.</span>
                         </li>
                         <li className={styles.listItems}>
@@ -49,13 +49,46 @@ const MissionPage = () => {
                     </ul>
                 </div>
                 <div className={styles.worldImgContainer}>
-                    <img className={styles.worldImg} src="/world.png" alt="a picture of the Earth in the shape of an apple"></img>
+                    <img className={styles.globeImg} src="/world.png" alt="a picture of the Earth in the shape of an apple"></img>
                 </div>
             </div>
 
             <div className={styles.sectionHeaderContainer}>
-                <h2 className={styles.sectionHeader}>OUR MISSION</h2>
+                <h2 className={styles.sectionHeader}>OUR PRODUCT</h2>
                 <div className={styles.sectionDivider}> </div>
+            </div>
+            <div className={styles.productContentContainer}>
+                <div>
+                    <p>
+                        We want to tackle our food waste, but where do we start? We believe that in our busy lives, what we need is the right tools.
+                        The Save Your Food app makes it easy to keep track of your pantry, grocery list, and meal plans all in one place.
+                    </p>
+                    <p>My Pantry helps streamline the process of maintaining your pantry:</p>
+                    <ul>
+                        <li className={styles.listItems}>
+                            Create a virtual copy of your pantry, and be able to search by item name and category.
+                        </li>
+                        <li className={styles.listItems}>
+                            Get notified when food is within 7 days of expiring.
+                        </li>
+                    </ul>
+                    <p>Meal Planning helps you tackle your weekly food plans:</p>
+                    <ul>
+                        <li className={styles.listItems}>
+                            Create your grocery list - and once you're done shopping, add your items to your pantry with the click of a button.
+                        </li>
+                        <li className={styles.listItems}>
+                            Keep track of items from your pantry that you want to use this week, and easily delete them from your pantry once used.
+                        </li>
+                        <li className={styles.listItems}>
+                            Create a visual schedule of your weekly meal plan to make sure your pantry items are getting used!
+                        </li>
+                    </ul>
+                </div>
+                <div className={styles.mobileImgContainer}>
+                    <img className={styles.mobileImg} src="/saveYourFoodApp.gif" alt="a demonstrating mobile app functionality"></img>
+                    <p className={styles.imgSubtext}>Take the same functionality on the go with our mobile app</p>
+                </div>
             </div>
         </div>
         /* 
