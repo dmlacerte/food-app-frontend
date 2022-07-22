@@ -10,23 +10,47 @@ Live version deployed to Netlify at: https://food-app-frontend.netlify.app/
 React, HTML5, CSS3, Bootstrap, Javascript
 
 **Application Functionality**<br />
-<details>
-<summary>- Ability to authenticate and set up user accounts using Google oAuth 2.0.</summary>
+<summary>- Responsive design across a variety of devices, including mobile and tablet.</summary>
 
-![login](https://user-images.githubusercontent.com/97196460/171936206-6c4ec611-0508-4485-9564-7f871fa411af.gif) <br />
+ <br />
 
 </details>
-- Ability to authenticate and set up user accounts using Google oAuth 2.0. <br />
-![login](https://user-images.githubusercontent.com/97196460/171936206-6c4ec611-0508-4485-9564-7f871fa411af.gif) <br />
-- Ability to search for and view results from backend 3rd party Google Books API. <br />
-![search](https://user-images.githubusercontent.com/97196460/171936589-40506ec7-8d9c-42d8-b312-2158da5beb6c.gif) <br />
-- Ability to categorize books in user list categories (reading, want to read, have read). <br />
-![userList](https://user-images.githubusercontent.com/97196460/171936859-51d14c84-4081-43c8-91b0-9ee92834d752.gif) <br />
-- Ability to create, read, update, and delete user book reviews, as well as view reviews from other users. <br />  
-![userRatings](https://user-images.githubusercontent.com/97196460/171938821-d4ed9458-e174-46d2-a279-ac470ed4d539.gif) <br />
-- Responsive design across a variety of devices, including mobile and tablet. <br />
-![mobile-view](https://user-images.githubusercontent.com/97196460/171935031-f4714a4a-3ded-4b08-a97c-a662cfbbe7f0.gif)
-![tablet-view](https://user-images.githubusercontent.com/97196460/171935770-5b9b2c01-0aac-44d2-bd72-0438b985252f.gif) <br />
+<summary>- Available both as a mobile and web application.</summary>
+
+![saveYourFoodApp](https://user-images.githubusercontent.com/97196460/180500030-c93eeb86-9637-4d91-8568-228ce3c90d2d.gif)<br />
+
+</details>
+<details>
+<summary>- Create a virtual copy of your pantry, and be able to search by item name and category.</summary>
+
+ <br />
+
+</details>
+<summary>- Get notified when food is within 7 days of expiring.</summary>
+
+ <br />
+
+</details>
+<summary>- Mark food you want to prioritize using.</summary>
+
+ <br />
+
+</details>
+<summary>- Create your grocery list - and once you're done shopping, add your items to your pantry with the click of a button.</summary>
+
+ <br />
+
+</details>
+<summary>- Keep track of items from your pantry that you want to prioritize using, and easily delete them from your pantry once used.</summary>
+
+ <br />
+
+</details>
+<summary>- Create a visual schedule of your weekly meal plan to make sure your pantry items are getting used!</summary>
+
+ <br />
+
+</details>
 
 **Unsolved Problems**<br />
 Still working through the following features: user accounts and authentication, expanding models to include recipes.
