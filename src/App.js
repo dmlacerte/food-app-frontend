@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import MyFoodList from "./components/MyFoodList";
 import MyMealPlan from "./components/MyMealPlan";
+import MissionPage from './components/MissionPage';
+
+import ScrollButton from "./components/ScrollButton";
 
 const App = () => {
+    
     return (
         <div>
             <nav className="navbar navbar-expand navbar-dark bg-success ps-2">
@@ -15,7 +19,7 @@ const App = () => {
                 </Link>
                 <div className="navbar-nav ms-auto">
                     <li className="nav-item">
-                        <Link to={"/"} className="nav-link">
+                        <Link to={"/mypantry"} className="nav-link">
                             My Pantry
                         </Link>
                     </li>
@@ -29,10 +33,13 @@ const App = () => {
 
             <div className="mt-3 pageBody">
                 <Routes>
-                    <Route path="/" element={<MyFoodList />} />
+                    <Route path="/" element={<MissionPage />} />
+                    <Route path="/mypantry" element={<MyFoodList />} />
                     <Route path="/mymealplan" element={<MyMealPlan />} />
                 </Routes>
             </div>
+
+            <ScrollButton />
         </div>
     );
 }

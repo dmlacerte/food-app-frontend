@@ -15,3 +15,38 @@
 .pageHeader {
     font-family: 'Oswald', sans-serif;
 }
+
+.Vegetable {
+    /* Img Source: https://northernnester.com/types-of-vegetables/ */
+    background-image: url('../public/veg.jpeg');
+}
+
+.Fruit {
+    /* Img Source: https://www.foodnetwork.com/how-to/packages/food-network-essentials/what-fruit-is-in-season */
+    background-image: url('../public/fruit.jpeg');
+}
+
+.Meat {
+    /* Img Source: https://en.wikipedia.org/wiki/Meat */
+    background-image: url('../public/meat.jpeg');
+}
+
+.Dairy {
+    /* Img Source: https://www.bruker.com/en/applications/food-analysis-and-agriculture/food-quality/milk-and-dairy.html */
+    background-image: url('../public/dairy.jpeg');
+}
+
+.Frozen {
+    /* img Source: https://www.thingstoshareandremember.com/frozen-foods-rescue-ad/ */
+    background-image: url('../public/frozen.jpeg');
+}
+
+.Packaged {
+    /* Img Source: https://www.cleaneatingmag.com/clean-pantry/the-worst-offenders-packaged-food-ingredients-to-look-out-for/ */
+    background-image: url('../public/packaged.png');
+}
+
+.Misc {
+    /* Img Source: https://hospitalityinsights.ehl.edu/top-spices-kitchen */
+    background-image: url('../public/misc.jpeg');
+}
