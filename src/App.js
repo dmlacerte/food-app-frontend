@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -7,7 +7,10 @@ import MyFoodList from "./components/MyFoodList";
 import MyMealPlan from "./components/MyMealPlan";
 import MissionPage from './components/MissionPage';
 
+import ScrollButton from "./components/ScrollButton";
+
 const App = () => {
+    
     return (
         <div>
             <nav className="navbar navbar-expand navbar-dark bg-success ps-2">
@@ -35,6 +38,8 @@ const App = () => {
                     <Route path="/mymealplan" element={<MyMealPlan />} />
                 </Routes>
             </div>
+
+            <ScrollButton />
         </div>
     );
 }
