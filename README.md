@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# Save Your Food Frontend (Web)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Project Description**<br />
+The web application frontend of Save Your Food, a food sustainability application. With this app, you can keep a virtual copy of your pantry, track expiration dates, and create grocery lists and meal plans to help with reducing food waste.
 
-## Available Scripts
+**Link to Deployed Application**<br />
+Live version deployed to Netlify at: https://food-app-frontend.netlify.app/
 
-In the project directory, you can run:
+**List of Technologies Used**<br />
+React, HTML5, CSS3, Bootstrap, Javascript
 
-### `npm start`
+**Application Functionality**<br />
+<details>
+<summary>- Ability to authenticate and set up user accounts using Google oAuth 2.0.</summary>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![login](https://user-images.githubusercontent.com/97196460/171936206-6c4ec611-0508-4485-9564-7f871fa411af.gif) <br />
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+</details>
+- Ability to authenticate and set up user accounts using Google oAuth 2.0. <br />
+![login](https://user-images.githubusercontent.com/97196460/171936206-6c4ec611-0508-4485-9564-7f871fa411af.gif) <br />
+- Ability to search for and view results from backend 3rd party Google Books API. <br />
+![search](https://user-images.githubusercontent.com/97196460/171936589-40506ec7-8d9c-42d8-b312-2158da5beb6c.gif) <br />
+- Ability to categorize books in user list categories (reading, want to read, have read). <br />
+![userList](https://user-images.githubusercontent.com/97196460/171936859-51d14c84-4081-43c8-91b0-9ee92834d752.gif) <br />
+- Ability to create, read, update, and delete user book reviews, as well as view reviews from other users. <br />  
+![userRatings](https://user-images.githubusercontent.com/97196460/171938821-d4ed9458-e174-46d2-a279-ac470ed4d539.gif) <br />
+- Responsive design across a variety of devices, including mobile and tablet. <br />
+![mobile-view](https://user-images.githubusercontent.com/97196460/171935031-f4714a4a-3ded-4b08-a97c-a662cfbbe7f0.gif)
+![tablet-view](https://user-images.githubusercontent.com/97196460/171935770-5b9b2c01-0aac-44d2-bd72-0438b985252f.gif) <br />
 
-### `npm test`
+**Unsolved Problems**<br />
+Still working through the following features: user accounts and authentication, expanding models to include recipes.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Link to Mobile App Frontend**<br />
+Frontend GitHub (Mobile): https://github.com/dmlacerte/food-app-frontend-mobile
 
-### `npm run build`
+**Link to Backend API**<br />
+Backend Live API: https://immense-brushlands-47117.herokuapp.com/<br />
+Backend GitHub: https://github.com/dmlacerte/food-app-backend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Installation Instructions**<br />
+1. Fork and clone down this repository.
+2. Install required packages using `npm i`.
+3. Assign the following env variables in an .env file at your root:
+    - REACT_APP_BASE_URL_DEV: Your backend dev URL (localhost)
+    - REACT_APP_BASE_URL_PROD: Your backend prod URL (if deploying)
+4. Run the backend API by following the instructions in the repo linked above. 
+5. Test the app functionality by running `npm start` to start the application. 
