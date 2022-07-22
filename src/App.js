@@ -15,13 +15,8 @@ const App = () => {
                     Save Your Food
                 </Link>
                 <div className="navbar-nav ms-auto">
-                <li className="nav-item">
-                        <Link to={"/aboutus"} className="nav-link">
-                            About Us
-                        </Link>
-                    </li>
                     <li className="nav-item">
-                        <Link to={"/"} className="nav-link">
+                        <Link to={"/mypantry"} className="nav-link">
                             My Pantry
                         </Link>
                     </li>
@@ -35,8 +30,8 @@ const App = () => {
 
             <div className="mt-3 pageBody">
                 <Routes>
-                    <Route path="/" element={<MyFoodList />} />
-                    <Route path="/aboutus" element={<MissionPage />} />
+                    <Route path="/" element={<MissionPage />} />
+                    <Route path="/mypantry" element={<MyFoodList />} />
                     <Route path="/mymealplan" element={<MyMealPlan />} />
                 </Routes>
             </div>

@@ -18,7 +18,9 @@ const MissionPage = () => {
             <p className={styles.subHeader}>Help the planet (and your wallet) using our all in one tool to manage your pantry, grocery list, and meal planning.</p>
 
             <div className={styles.introSectionContainer}>
-                <img src="/rottenFruit.jpeg" alt="a picture of rotten avocados and bananas"></img>
+                <div className={styles.headerImgContainer}>
+                    <img className={styles.headerImg} src="/rottenFruit.jpeg" alt="a picture of rotten avocados and bananas"></img>
+                </div>
                 <p className={styles.textParagraph}>
                     <span className={styles.boldText}> Nearly 40% of all of our food ends up in the trash,</span> even though <span className={styles.boldText}>1 in 6 Americans face food insecurity.</span> While food waste can occur at all stages of the food production and distribution cycle
                     (unharvested crops, restaurant waste, damage during manufacturing and distribution, not meeting retailer standards for appearance),
@@ -105,7 +107,7 @@ const MissionPage = () => {
                         We want to tackle our food waste, but where do we start? We believe that in our busy lives, what we need is the right tools.
                         The Save Your Food app makes it easy to keep track of your pantry, grocery list, and meal plans all in one place.
                     </p>
-                    <p>My Pantry helps streamline the process of maintaining your pantry:</p>
+                    <p><a className={styles.hyperlink} href="/mypantry">My Pantry</a> helps streamline the process of maintaining your pantry:</p>
                     <ul>
                         <li className={styles.listItems}>
                             Create a virtual copy of your pantry, and be able to search by item name and category.
@@ -117,7 +119,7 @@ const MissionPage = () => {
                             Mark food you want to prioritize using.
                         </li>
                     </ul>
-                    <p>Meal Planning helps you tackle your weekly food plans:</p>
+                    <p><a className={styles.hyperlink} href="/mymealplan">Meal Planning</a> helps you tackle your weekly food plans:</p>
                     <ul>
                         <li className={styles.listItems}>
                             Create your grocery list - and once you're done shopping, add your items to your pantry with the click of a button.
