@@ -10,11 +10,13 @@ Live version deployed to Netlify at: https://food-app-frontend.netlify.app/
 React, HTML5, CSS3, Bootstrap, Javascript
 
 **Application Functionality**<br />
+<details>
 <summary>- Responsive design across a variety of devices, including mobile and tablet.</summary>
 
  <br />
 
 </details>
+<details>
 <summary>- Available both as a mobile and web application.</summary>
 
 ![saveYourFoodApp](https://user-images.githubusercontent.com/97196460/180500030-c93eeb86-9637-4d91-8568-228ce3c90d2d.gif)<br />
@@ -26,26 +28,31 @@ React, HTML5, CSS3, Bootstrap, Javascript
  <br />
 
 </details>
+<details>
 <summary>- Get notified when food is within 7 days of expiring.</summary>
 
  <br />
 
 </details>
+<details>
 <summary>- Mark food you want to prioritize using.</summary>
 
  <br />
 
 </details>
+<details>
 <summary>- Create your grocery list - and once you're done shopping, add your items to your pantry with the click of a button.</summary>
 
  <br />
 
 </details>
+<details>
 <summary>- Keep track of items from your pantry that you want to prioritize using, and easily delete them from your pantry once used.</summary>
 
  <br />
 
 </details>
+<details>
 <summary>- Create a visual schedule of your weekly meal plan to make sure your pantry items are getting used!</summary>
 
  <br />
