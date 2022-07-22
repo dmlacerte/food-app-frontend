@@ -26,15 +26,15 @@
 }
 
 .typeOptions {
-    background: lightblue;
     border-radius: 50%;
     width: 100px;
     height: 100px;
     margin: 5px;
     text-align: center;
     font-size: 16px;
-    padding-top: 35px;
+    padding-top: 38px;
     font-weight: bold;
+    color: white;
 }
 
 .typeOptions:hover {

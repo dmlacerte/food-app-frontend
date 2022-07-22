@@ -3,6 +3,7 @@ import FoodManagerDataService from "../services/FoodManagerDataService";
 import Container from "./modal/Container.js";
 import AddToMealPlanButton from "./AddToMealPlanButton";
 import styles from "./css/MyFoodList.module.css";
+import "../App.css";
 
 const MyFoodList = () => {
     const [foodItems, setFoodItems] = useState([]);
@@ -168,7 +169,13 @@ const MyFoodList = () => {
                 <div className={styles.typeContainer}>
                     {typeOptions.map((type, index) => {
                         return (
-                            <div key={index} className={styles.typeOptions + " " + (type === selectedType ? styles.selectedType : "")} onClick={filterOnType}>{type}</div>
+                            <div 
+                                key={index} 
+                                className={styles.typeOptions + " " + type + " " + (type === selectedType ? styles.selectedType : "")} 
+                                onClick={filterOnType}
+                            >
+                                {type}
+                            </div>
                         )
                     })}
                 </div>
